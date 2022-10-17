@@ -1,0 +1,23 @@
+@import "./breakpoints";
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @media only screen and (min-width: $phone) {
+    width: #{(90 / 100 * $phone)};
+  }
+
+  @media only screen and (min-width: $tablet) {
+    width: #{(90 / 100 * $tablet)};
+  }
+
+  @media only screen and (min-width: $desktop) {
+    width: #{(90 / 100 * $desktop)};
+  }
+
+  @media only screen and (min-width: $desktop-big) {
+    width: #{(90 / 100 * $desktop-big)};
+  }
+}

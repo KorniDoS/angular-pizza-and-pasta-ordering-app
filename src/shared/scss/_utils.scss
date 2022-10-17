@@ -1,0 +1,81 @@
+$small: 1rem;
+$medium: 2rem;
+$big: 4rem;
+$huge: 6rem;
+
+@mixin d-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+@mixin d-flex-center-column {
+  @include d-flex-center();
+  flex-flow: column nowrap;
+}
+
+.u-margin-center {
+  margin-inline: auto;
+}
+
+.u-margin-block-small {
+  margin-block: $small;
+}
+.u-margin-block-medium {
+  margin-block: $medium;
+}
+.u-margin-block-big {
+  margin-block: $big;
+}
+.u-margin-block-huge {
+  margin-block: $huge;
+}
+
+.u-margin-top-small {
+  margin-block-start: $small;
+}
+
+.u-margin-top-medium {
+  margin-block-start: $medium;
+}
+
+.u-margin-top-big {
+  margin-block-start: $big;
+}
+
+.u-margin-top-huge {
+  margin-block-start: $huge;
+}
+
+.u-margin-bottom-small {
+  margin-block-end: $small;
+}
+
+.u-margin-bottom-medium {
+  margin-block-end: $medium;
+}
+
+.u-margin-bottom-big {
+  margin-block-end: $big;
+}
+
+.u-margin-bottom-huge {
+  margin-block-end: $huge;
+}
+
+.u-padding-small {
+  padding: $small;
+}
+
+.u-padding-medium {
+  padding: $medium;
+}
+
+.u-padding-big {
+  padding: $big;
+}
+
+.u-button-padding {
+  padding: 0.6rem 2rem;
+}

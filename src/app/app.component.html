@@ -1,3 +1,25 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
-
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    [mode]="isSmall ? 'over' : 'side'"
+    [opened]="showSidenav === true || !isSmall"
+    #sidenav
+  >
+    <mat-nav-list>
+      <mat-list-item *ngFor="let link of navigationLinks">
+        <a matLine [routerLink]="[link.link]">{{ link.link | titlecase }}</a>
+        <a [routerLink]="[link.link]" mat-icon-button>
+          <mat-icon *ngIf="link.link === 'cart'; else default" [matBadge]="cart.length" matBadgeColor="accent">{{ link.icon }}</mat-icon>
+          <ng-template #default>
+            <mat-icon>{{link.icon}}</mat-icon>
+            </ng-template>
+          
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet #router></router-outlet>
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

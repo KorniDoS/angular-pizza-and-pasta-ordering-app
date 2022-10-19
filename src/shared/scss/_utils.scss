@@ -3,6 +3,8 @@ $medium: 2rem;
 $big: 4rem;
 $huge: 6rem;
 
+@import './colours';
+
 @mixin d-flex-center {
   display: flex;
   justify-content: center;
@@ -64,6 +66,11 @@ $huge: 6rem;
   margin-block-end: $huge;
 }
 
+.u-margin-left-small{
+margin-inline-start: $small;
+
+}
+
 .u-padding-small {
   padding: $small;
 }
@@ -76,6 +83,29 @@ $huge: 6rem;
   padding: $big;
 }
 
+
+
+.u-padding-bottom-big{
+  padding-block-end: $big;
+}
+
 .u-button-padding {
   padding: 0.6rem 2rem;
+}
+
+
+.u-white{
+  color: white !important;
+}
+
+.u-black{
+  color: black !important;
+}
+
+.u-primary{
+  color: $primary !important;
+}
+
+.u-accent{
+  color: $accent !important;
 }

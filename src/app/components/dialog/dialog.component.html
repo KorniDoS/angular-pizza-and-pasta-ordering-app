@@ -1,0 +1,255 @@
+<div class="dialog" *ngIf="data.item?.type === 'Pizza' && !editMode">
+  <button mat-fab class="close" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
+  <div class="container">
+    <h1 class="dialog__title u-margin-bottom-small">{{ data.item?.name }}</h1>
+    <img
+      class="dialog__image u-margin-bottom-small"
+      [src]="data.item?.image"
+      [alt]="data.item?.name"
+    />
+    <h2 class="dialog__price u-margin-bottom-small">
+      Price: {{ data.item?.price | currency: "EUR" }}
+    </h2>
+    <ul class="dialog__list u-margin-bottom-small">
+      <h2>Toppings:</h2>
+      <li
+        class="dialog__list__list-item?"
+        *ngFor="let ing of data.item?.toppings"
+      >
+        {{ ing | titlecase }}
+      </li>
+    </ul>
+
+    <div class="text-wrapper u-margin-bottom-small">
+       <p class="dialog__description">
+        <strong>Size: </strong>{{ data.item?.size }}
+      </p>
+      <p class="dialog__description">
+        <strong>Crust type: </strong>{{ data.item?.crust }}
+      </p>
+     
+    </div>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+      Edit
+    </button>
+    <button mat-raised-button color="accent" class="u-primary" (click)="addToCart(data.item)">
+      Add to cart
+    </button>
+  </div>
+</div>
+
+<div
+  class="dialog dialog--edit-mode"
+  *ngIf="data.item?.type === 'Pizza' && editMode"
+>
+  <div class="container">
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="pizzaToppingGroup">
+        <form [formGroup]="pizzaToppingGroup">
+          <ng-template matStepLabel>Add new toppings</ng-template>
+
+          <div style="display: flex; align-items: center">
+            <mat-form-field appearance="fill">
+              <mat-label>Topping</mat-label>
+              <input
+                matInput
+                placeholder="Cheese"
+                formControlName="topping"
+                required
+              />
+            </mat-form-field>
+            <button
+              class="u-margin-bottom-small u-margin-left-small"
+              mat-fab
+              (click)="pushTopping(data.item.type)"
+            >
+              <mat-icon mat-fab>add</mat-icon>
+            </button>
+          </div>
+          <mat-list>
+            <mat-list-item *ngFor="let topping of toppingsCopy">{{
+              topping | titlecase
+            }}</mat-list-item>
+          </mat-list>
+          <div>
+            <button mat-raised-button matStepperNext class="u-margin-top-small u-margin-left-small u-primary" color="accent">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step
+        [stepControl]="pizzaExtraGroup"
+        label="Select your crust type and size"
+      >
+        <form
+          [formGroup]="pizzaExtraGroup"
+          style="display: flex; flex-direction: column"
+        >
+          <mat-form-field appearance="fill">
+            <mat-label>Crust type: </mat-label>
+            <mat-select name="crust" formControlName="crustType" required>
+              <mat-option value="soft">Soft</mat-option>
+              <mat-option value="medium">Medium</mat-option>
+              <mat-option value="hard">Hard</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Size: </mat-label>
+            <mat-select name="size" formControlName="size" required>
+              <mat-option value="small">Small</mat-option>
+              <mat-option value="medium">Medium</mat-option>
+              <mat-option value="big">Big</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
+            <button mat-raised-button matStepperNext class="u-margin-left-small u-primary" color="accent">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>
+          You are now done. Save your changes or discard them.
+        </p>
+        <div>
+          <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
+          <button
+          class="u-margin-left-small u-accent"
+          color="primary"
+            mat-raised-button
+            (click)="completeEditing(data.item, data.id)"
+          >
+            Save changes
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="toggleEditMode()">
+      Edit
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      [disabled]="editMode"
+      (click)="addToCart(data.item)"
+    >
+      Add to cart
+    </button>
+  </div>
+</div>
+
+<div
+  class="dialog u-padding-small"
+  *ngIf="data.item?.type === 'Pasta' && !editMode"
+>
+<button mat-fab class="close" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
+  <div class="container">
+    <h1 class="dialog__title u-margin-bottom-small">{{ data.item?.name }}</h1>
+    <img
+      class="dialog__image u-margin-bottom-small"
+      [src]="data.item?.image"
+      [alt]="data.item?.name"
+    />
+    <h2 class="dialog__price u-margin-bottom-small">
+      Price: {{ data.item?.price | currency: "EUR" }}
+    </h2>
+    <ul class="dialog__list u-margin-bottom-small">
+      <h2>Ingredients:</h2>
+      <li
+        class="dialog__list__list-item?"
+        *ngFor="let ing of data.item?.toppings"
+      >
+        {{ ing | titlecase }}
+      </li>
+    </ul>
+
+    <div class="text-wrapper u-margin-bottom-small">
+      <p class="dialog__description">{{ data.item?.description }}</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+      Edit
+    </button>
+    <button mat-raised-button color="accent" class="u-primary" (click)="addToCart(data.item)">
+      Add to cart
+    </button>
+  </div>
+</div>
+
+<div
+  class="dialog dialog--edit-mode"
+  *ngIf="data.item?.type === 'Pasta' && editMode"
+>
+  <div class="container">
+    <mat-stepper #stepper>
+      <mat-step [stepControl]="pastaForm">
+        <form [formGroup]="pastaForm">
+          <ng-template matStepLabel>Add new ingredients</ng-template>
+
+          <div style="display: flex; align-items: center">
+            <mat-form-field appearance="fill">
+              <mat-label>Ingredients</mat-label>
+              <input
+                matInput
+                placeholder="Cheese"
+                formControlName="ingredients"
+                required
+              />
+            </mat-form-field>
+            <button
+              class="u-margin-bottom-small u-margin-left-small"
+              mat-fab
+              (click)="pushTopping(data.item.type)"
+            >
+              <mat-icon mat-fab>add</mat-icon>
+            </button>
+          </div>
+          <mat-list>
+            <mat-list-item *ngFor="let topping of toppingsCopy">{{
+              topping | titlecase
+            }}</mat-list-item>
+          </mat-list>
+          <div>
+            <button mat-raised-button matStepperNext class="u-margin-top-small u-margin-left-small u-primary" color="accent">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done. Save your changes or discard them</p>
+        <div>
+          <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
+          <button
+          class="u-margin-top-small u-margin-left-small u-accent"
+          color="primary"
+            mat-raised-button
+            (click)="completeEditing(data.item, data.id)"
+          >
+            Save changes
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+  <div class="actions">
+    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+      Edit
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      class="u-primary"
+      [disabled]="editMode"
+      (click)="addToCart(data.item)"
+    >
+      Add to cart
+    </button>
+  </div>
+</div>

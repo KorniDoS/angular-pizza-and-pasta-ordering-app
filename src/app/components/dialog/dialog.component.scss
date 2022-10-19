@@ -1,0 +1,51 @@
+@import 'src/shared/scss/utils';
+
+.dialog {
+  width: 100%;
+  //margin: 0 auto;
+  position: relative;
+
+  .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center;
+  }
+  &__title {
+  }
+  &__image {
+    max-width: 100%;
+    height: 300px;
+    border-radius: 6px;
+  }
+
+  &__list {
+    &__list-item {
+    }
+  }
+
+  &__price {
+  }
+
+  &__description {
+  }
+}
+
+.dialog--edit-mode {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

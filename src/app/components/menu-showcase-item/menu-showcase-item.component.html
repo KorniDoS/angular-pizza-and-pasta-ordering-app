@@ -1,0 +1,25 @@
+<div class="menu-showcase__item">
+    <mat-card *ngIf="menuItem.type === 'Pizza'" class="menu-showcase__card">
+      <mat-card-title class="menu-showcase__title u-padding-small">{{menuItem.name}}</mat-card-title>
+      <img mat-card-image class="menu-showcase__image" [src]="menuItem.image" alt="">
+      <mat-card-subtitle class="menu-showcase__subtitle">{{menuItem.price | currency:'EUR'}}</mat-card-subtitle>
+      <mat-card-content class="menu-showcase__content">
+        <span *ngFor="let topping of menuItem.toppings; let k = index">{{topping | titlecase}}<span *ngIf="k < menuItem.toppings.length - 1">, </span></span>
+      </mat-card-content>
+      <mat-card-actions class="menu-showcase__actions u-margin-bottom-small">
+        <button [ngClass]="{'menu-showcase__actions-button': !addedToCart, 'menu-showcase__actions-button--added': addedToCart }" mat-raised-button [color]="addedToCart ? 'primary' : 'accent'" (click)="onAddToCart(menuItem)">{{addedToCart ? 'Added': 'Add to cart'}}</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card *ngIf="menuItem.type === 'Pasta'" class="menu-showcase__card">
+      <mat-card-title class="menu-showcase__title u-padding-small">{{menuItem.name}}</mat-card-title>
+      <img mat-card-image class="menu-showcase__image" [src]="menuItem.image" alt="">
+      <mat-card-subtitle class="menu-showcase__subtitle">{{menuItem.price | currency:'EUR'}}</mat-card-subtitle>
+      <mat-card-content class="menu-showcase__content">
+        <span *ngFor="let ingredient of menuItem.toppings; let k = index">{{ingredient | titlecase}}<span *ngIf="k < menuItem.toppings.length - 1">, </span></span>
+      </mat-card-content>
+      <mat-card-actions class="menu-showcase__actions u-margin-bottom-small">
+        <button [ngClass]="{'menu-showcase__actions-button': !addedToCart, 'menu-showcase__actions-button--added': addedToCart }" mat-raised-button [color]="addedToCart ? 'primary' : 'accent'" (click)="onAddToCart(menuItem)">{{addedToCart ? 'Added': 'Add to cart'}}</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

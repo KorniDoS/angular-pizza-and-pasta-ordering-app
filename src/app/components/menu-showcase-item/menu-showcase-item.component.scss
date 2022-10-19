@@ -1,0 +1,33 @@
+@import 'src/shared/scss/utils';
+@import 'src/shared/scss/colours';
+.menu-showcase__item {
+    width: 25rem;
+    .menu-showcase__card {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+
+      .menu-showcase__title {
+      }
+
+      .menu-showcase__image {
+        max-height: 25rem;
+      }
+
+      .menu-showcase__subtitle {
+        font-weight: 500;
+      }
+
+      .menu-showcase__actions{
+        .menu-showcase__actions-button{
+          color: $primary;
+        }
+
+        .menu-showcase__actions-button--added{
+          color: white;
+        }
+      }
+    }
+  }

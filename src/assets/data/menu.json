@@ -1,0 +1,122 @@
+[
+  {
+    "pizza": [
+      {
+        "name": "Quattro Stagioni",
+        "type": "Pizza",
+        "toppings": ["tomato sauce", "cheese", "mushrooms", "ham", "olives"],
+        "crust": "soft",
+        "size": "medium",
+        "image": "assets/images/pizza-1.jpg",
+        "price": "9",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
+      },
+      {
+        "name": "Primavera",
+        "type": "Pizza",
+        "toppings": ["asparagus", "zucchini", "peas", "mozzarella"],
+        "crust": "medium",
+        "size": "big",
+        "image": "assets/images/pizza-2.jpg",
+        "price": "9",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
+      },
+      {
+        "name": "Quattro Formaggi",
+        "type": "Pizza",
+        "toppings": ["mozzarella", "emmental", "gorgonzola", "ricotta"],
+        "crust": "soft",
+        "size": "medium",
+        "image": "assets/images/pizza-3.jpg",
+        "price": "8",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
+      },
+      {
+        "name": "Pepperoni",
+        "type": "Pizza",
+        "toppings": ["pepperoni", "chese", "tomato sauce"],
+        "crust": "soft",
+        "size": "small",
+        "image": "assets/images/pizza-4.jpg",
+        "price": "7",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
+      },
+      {
+        "name": "Margherita",
+        "type": "Pizza",
+        "toppings": ["tomato sauce", "chese", "olives"],
+        "crust": "soft",
+        "size": "small",
+        "image": "assets/images/pizza-5.jpg",
+        "price": "6",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
+      }
+      
+    ]
+  },
+
+  {
+    "pasta": [
+      {
+        "name": "Penne",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "salt"],
+        "image": "assets/images/penne.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "8"
+      },
+      {
+        "name": "Spaghetti",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "salt", "butter"],
+        "image": "assets/images/spaghetti.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "8"
+      }
+      ,
+      {
+        "name": "Fettuccine",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "ham"],
+        "image": "assets/images/fettuccine.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "8"
+      }
+      ,
+      {
+        "name": "Farfalle",
+        "type": "Pasta",
+        "toppings": ["salad", "tomatoes", "mushrooms"],
+        "image": "assets/images/farfalle.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "8"
+      }
+      ,
+      {
+        "name": "Macaroni",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "cheese"],
+        "image": "assets/images/macaroni.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "6"
+      },
+      
+      {
+        "name": "Fusilli",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "green peas", "tuna", "pepper"],
+        "image": "assets/images/fusilli.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "7"
+      },
+      {
+        "name": "Lasagna",
+        "type": "Pasta",
+        "toppings": ["tomato sauce", "sausages", "cheese", "onions"],
+        "image": "assets/images/lasagna.jpg",
+        "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?",
+        "price": "9"
+      }
+    ]
+  }
+]

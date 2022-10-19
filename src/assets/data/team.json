@@ -1,0 +1,39 @@
+[
+{
+    "name": "Antonio",
+    "age": 32,
+    "role": "Owner",
+    "image": "assets/images/owner.jpg",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo repellat placeat minima rerum suscipit perspiciatis voluptatibus  aspernatur sunt quibusdam, cum cumque, aperiam adipisci at quasi eveniet similique obcaecati doloremque.",
+    "motto": "A day lived without joy is a wasted day."
+
+},
+{
+    "name": "Davide",
+    "age": 25,
+    "role": "Chef",
+    "image": "assets/images/chef1-small.jpg",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo repellat placeat minima rerum suscipit perspiciatis voluptatibus  aspernatur sunt quibusdam, cum cumque, aperiam adipisci at quasi eveniet similique obcaecati doloremque.",
+    "motto": "A day lived without joy is a wasted day."
+
+},
+{
+    "name": "Mario",
+    "age": 29,
+    "role": "Chef",
+    "image": "assets/images/chef2-small.jpg",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo repellat placeat minima rerum suscipit perspiciatis voluptatibus  aspernatur sunt quibusdam, cum cumque, aperiam adipisci at quasi eveniet similique obcaecati doloremque.",
+    "motto": "A day lived without joy is a wasted day."
+
+},
+{
+    "name": "Romeo",
+    "age": 40,
+    "role": "Delivery",
+    "image": "assets/images/delivery-small.jpg",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis illo repellat placeat minima rerum suscipit perspiciatis voluptatibus  aspernatur sunt quibusdam, cum cumque, aperiam adipisci at quasi eveniet similique obcaecati doloremque.",
+    "motto": "A day lived without joy is a wasted day."
+
+}
+
+]

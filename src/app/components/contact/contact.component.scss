@@ -1,0 +1,29 @@
+.contact{
+    width: 100%;
+    min-height: 100vh;
+    &__container{
+
+       &__title{
+        text-align: center;
+       }
+
+        .wrapper{
+            display: flex;
+            flex-direction: column;
+
+            @media only screen and (min-width: 56.25em) {
+                flex-direction: row;
+                gap: 2rem;
+                
+            }
+
+            .google-maps{
+                width: 100%;
+
+                @media only screen and (min-width: 56.25em) {
+                    max-width: 50%;
+                }
+            }
+        }
+    }
+}

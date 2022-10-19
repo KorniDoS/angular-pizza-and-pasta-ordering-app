@@ -9,29 +9,93 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$pizza_pasta-primary: mat.define-palette(mat.$indigo-palette);
-$pizza_pasta-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+/* For use in src/lib/core/theming/_palette.scss */
+$md-pizzapasta: (
+    50 : #f5efe9,
+    100 : #e7d7c8,
+    200 : #d7bda3,
+    300 : #c6a27e,
+    400 : #ba8e63,
+    500 : #ae7a47,
+    600 : #a77240,
+    700 : #9d6737,
+    800 : #945d2f,
+    900 : #844a20,
+    A100 : #ffd9c1,
+    A200 : #ffba8e,
+    A400 : #ff9c5b,
+    A700 : #ff8c41,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
 
-// The warn palette is optional (defaults to red).
-$pizza_pasta-warn: mat.define-palette(mat.$red-palette);
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-pizzapastaaccent: (
+    50 : #fcfbf7,
+    100 : #f9f4ec,
+    200 : #f5ede0,
+    300 : #f0e5d3,
+    400 : #ede0c9,
+    500 : #eadac0,
+    600 : #e7d6ba,
+    700 : #e4d0b2,
+    800 : #e1cbaa,
+    900 : #dbc29c,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #fffefd,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$app-primary: mat.define-palette($md-pizzapasta, 500, 800, 900);
+$app-accent: mat.define-palette($md-pizzapastaaccent, 500, 700, 900);
+//$candy-app-warn: mat.define-palette($wfs-blue-palette, 800, 700, 900);
 
 // Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$pizza_pasta-theme: mat.define-light-theme((
+// theming systems such as `color` or `typography`.
+$app-theme: mat.define-light-theme((
   color: (
-    primary: $pizza_pasta-primary,
-    accent: $pizza_pasta-accent,
-    warn: $pizza_pasta-warn,
-  )
+    primary: $app-primary,
+    accent: $app-accent,
+  ),
+  
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($pizza_pasta-theme);
+@include mat.all-component-themes($app-theme);
 
 /* You can add global styles to this file, and also import other style files */
 

@@ -1,0 +1,202 @@
+<mat-stepper [linear]="true" #stepper [formGroup]="wizardForm">
+    <mat-step
+      formArrayName="formArr"
+      [stepControl]="FormArr?.get([0])!"
+      editable="false"
+    >
+      <form [formGroup]="wizardForm" formGroupName="0">
+        <ng-template matStepLabel>Choose your type: </ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Type: </mat-label>
+          <mat-select placeholder="Product" formControlName="type" required>
+            <mat-option value="pizza">Pizza</mat-option>
+            <mat-option value="pasta">Pasta</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperNext>Next</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+    <mat-step formArrayName="formArr" [stepControl]="FormArr?.get([1])!">
+      <form [formGroup]="wizardForm" formGroupName="1">
+        <ng-template matStepLabel>Choose a name and set a price: </ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name: </mat-label>
+          <input
+            matInput
+            placeholder="Ex: My Awesome Food"
+            formControlName="name"
+            required
+            minlength="5"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="u-remove-margin">
+          <mat-label>Price: </mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Ex: 5"
+            formControlName="price"
+            min="5"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-raised-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step
+      formArrayName="formArr"
+      [stepControl]="FormArr?.get([2])!"
+      *ngIf="newItemType?.type === 'pizza'"
+    >
+      <form [formGroup]="wizardForm" formGroupName="2">
+        <ng-template matStepLabel
+          >Add toppings, set size and crust type:
+        </ng-template>
+        <div
+          class="container"
+          style="display: flex; flex-direction: column"
+        >
+          <div class="container" style="display: flex; gap: 1rem">
+            <mat-form-field appearance="fill">
+              <mat-label>Ingredients: </mat-label>
+              <input
+                matInput
+                placeholder="Ex: Mushrooms"
+                formControlName="toppings"
+                required
+              />
+            </mat-form-field>
+            <button mat-raised-button mat-fab (click)="addTopping()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <mat-list>
+            <mat-list-item *ngFor="let top of newToppingsArr">{{
+              top
+            }}</mat-list-item>
+          </mat-list>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Size: </mat-label>
+          <mat-select
+            matInput
+            placeholder="Ex: Medium"
+            formControlName="size"
+            required
+          >
+            <mat-option value="small">Small</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="big">Big</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="u-remove-margin">
+          <mat-label>Crust type: </mat-label>
+          <mat-select
+            matInput
+            placeholder="Ex: Soft"
+            formControlName="crustType"
+            required=""
+          >
+            <mat-option value="soft">Soft</mat-option>
+            <mat-option value="medium">Medium</mat-option>
+            <mat-option value="hard">Hard</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button matStepperNext class="" color="primary" class="u-white" (click)="onFinish()">Finish</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step
+      formArrayName="formArr"
+      [stepControl]="FormArr?.get([3])!"
+      *ngIf="newItemType?.type === 'pasta'"
+    >
+      <form [formGroup]="wizardForm" formGroupName="3">
+        <ng-template matStepLabel>Add ingredients: </ng-template>
+        <div
+          class="container"
+          style="display: flex; flex-direction: column"
+        >
+          <div class="container" style="display: flex; gap: 1rem">
+            <mat-form-field appearance="fill">
+              <mat-label>Ingredients: </mat-label>
+              <input
+                matInput
+                placeholder="Ex: tomatoes"
+                formControlName="toppings"
+                required
+              />
+            </mat-form-field>
+            <button
+              class="u-margin-bottom-small"
+              mat-raised-button
+              mat-fab
+              (click)="addIngredient()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+          <mat-list>
+            <mat-list-item *ngFor="let top of newToppingsArrPasta">{{
+              top
+            }}</mat-list-item>
+          </mat-list>
+        </div>
+
+        <div>
+          <button mat-raised-button matStepperNext class="">Next</button>
+        </div>
+      </form>
+    
+    </mat-step>
+
+    <mat-step
+      formArrayName="formArr"
+      [stepControl]="FormArr?.get([4])!"
+      *ngIf="newItemType?.type === 'pasta'"
+    >
+      <form [formGroup]="wizardForm" formGroupName="4">
+        <ng-template matStepLabel>Add a description: </ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Description: </mat-label>
+          <textarea
+            type="number"
+            matInput
+            placeholder="Ex: Wonderful taste"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+
+        <div>
+          <button mat-raised-button matStepperNext class="" color="primary" class="u-white" (click)="onFinish()">Finish</button>
+        </div>
+      </form>
+
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done!</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">OK</button>
+      </div>
+    </mat-step>
+
+  </mat-stepper>

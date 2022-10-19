@@ -1,0 +1,75 @@
+<div *ngIf="member.role === 'Owner'" class="team__owner u-margin-bottom-small">
+  <div class="flex-wrapper">
+    <h3 class="team__owner__figure__name u-margin-block-medium">
+      {{ member.name }}, {{ member.age }} - {{ member.role }}
+    </h3>
+    <figure class="team__owner__figure">
+      <img class="team__owner__figure__image" [src]="member.image" alt="" />
+      <figcaption>
+        <em>"{{ member.motto }}"</em>
+      </figcaption>
+    </figure>
+    <p class="team__owner__description u-padding-small">
+      {{ member.description }}
+    </p>
+  </div>
+</div>
+
+<div class="team__chefs">
+  <div
+    *ngIf="member.role === 'Chef' && id % 2 !== 0"
+    class="team__chefs u-margin-bottom-big"
+  >
+    <div class="flex-wrapper team__chefs__chef1">
+      <h3 class="team__chefs__name u-margin-block-medium">
+        {{ member.name }}, {{ member.age }} - {{ member.role }}
+      </h3>
+      <figure class="team__chefs__figure u-margin-bottom-small">
+        <img class="team__chefs__figure__image" [src]="member.image" alt="" />
+        <figcaption>
+          <em>"{{ member.motto }}"</em>
+        </figcaption>
+      </figure>
+      <p class="team__chefs__description u-padding-small">
+        {{ member.description }}
+      </p>
+    </div>
+  </div>
+
+  <div
+    *ngIf="member.role === 'Chef' && id % 2 === 0"
+    class="team__chefs u-margin-bottom-big"
+  >
+    <div class="flex-wrapper team__chefs__chef2">
+      <h3 class="team__chefs__name u-margin-block-medium">
+        {{ member.name }}, {{ member.age }} - {{ member.role }}
+      </h3>
+      <figure class="team__chefs__figure u-margin-bottom-small">
+        <img class="team__chefs__figure__image" [src]="member.image" alt="" />
+        <figcaption>
+          <em>"{{ member.motto }}"</em>
+        </figcaption>
+      </figure>
+      <p class="team__chefs__description u-padding-small">
+        {{ member.description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="team__delivery">
+  <div *ngIf="member.role === 'Delivery'" class="flex-wrapper">
+    <h3 class="team__delivery__name u-margin-block-medium">
+      {{ member.name }}, {{ member.age }} - {{ member.role }}
+    </h3>
+    <figure class="team__delivery__figure u-margin-bottom-small">
+      <img class="team__delivery__figure__image" [src]="member.image" alt="" />
+      <figcaption>
+        <em>"{{ member.motto }}"</em>
+      </figcaption>
+    </figure>
+    <p class="team__delivery__description u-padding-small">
+      {{ member.description }}
+    </p>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+@import "src/shared/scss/utils";
+@import "src/shared/scss/animations";
+@import "src/shared/scss/breakpoints";
+.flex-wrapper {
+  @include d-flex-center();
+  align-items: flex-start;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+
+  @media only screen and (min-width: $desktop) {
+    all: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px minmax(500px, 1fr);
+    justify-items: center;
+
+    .team__owner__figure {
+      grid-column: 1/1;
+    }
+
+    &.team__chefs__chef1 {
+      .team__chefs__name {
+        grid-column: 2/2;
+      }
+      .team__chefs__figure {
+        grid-column: 2/2;
+      }
+      .team__chefs__description {
+        grid-column: 1/1;
+        grid-row: 2/2;
+      }
+    }
+
+    &.team__chefs__chef2 {
+      .team__chefs__name {
+        grid-column: 1/1;
+      }
+      .team__chefs__figure {
+        grid-column: 1/1;
+      }
+      .team__chefs__description {
+        grid-column: 2/2;
+        grid-row: 2/2;
+      }
+    }
+
+    .team__delivery {
+      &__name {
+        grid-row: 1/1;
+        grid-column: 2/2;
+      }
+      &__figure {
+        grid-column: 2/2;
+      }
+      &__description {
+        grid-column: 1/1;
+        grid-row: 2/2;
+      }
+    }
+  }
+}
+
+.team {
+  //background: linear-gradient(to right bottom, #d7d2cc, #304352);
+  &__title {
+    text-align: center;
+  }
+
+  &__owner {
+    // display: flex;
+    // justify-content: center;
+    //  align-items: center;
+    // flex-direction: column;
+
+    //@media only screen and (min-width: 37.5em) {
+    //  flex-direction: row;
+    // }
+
+    &__description {
+      //margin-block-start: 1rem;
+      width: 100%;
+      max-width: 50ch;
+      //flex-basis: 100%;
+      text-align: left;
+
+      @media only screen and (min-width: 52.25em) {
+        width: 50ch;
+      }
+    }
+
+    &__figure {
+      &__name {
+        // justify-self: flex-start;
+        text-align: center;
+      }
+
+      &__image {
+      }
+    }
+  }
+
+  &__chefs {
+    // display: flex;
+    // justify-content: center;
+    //  align-items: center;
+    // flex-direction: column;
+
+    //@media only screen and (min-width: 37.5em) {
+    //  flex-direction: row;
+    // }
+
+    &__description {
+      //margin-block-start: 1rem;
+      width: 100%;
+      max-width: 50ch;
+      //flex-basis: 100%;
+      text-align: left;
+    }
+
+    &__figure {
+      &__name {
+        // justify-self: flex-start;
+        text-align: center;
+      }
+
+      &__image {
+        width: 23.6875rem;
+      }
+    }
+  }
+
+  &__delivery {
+    &__description {
+      //margin-block-start: 1rem;
+      width: 100%;
+      max-width: 50ch;
+      //flex-basis: 100%;
+      text-align: left;
+    }
+
+    &__figure {
+      &__name {
+        // justify-self: flex-start;
+        text-align: center;
+      }
+
+      &__image {
+        width: 23.6875rem;
+      }
+    }
+  }
+}

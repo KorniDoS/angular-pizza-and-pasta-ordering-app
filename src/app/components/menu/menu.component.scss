@@ -1,0 +1,21 @@
+@import 'src/shared/scss/utils';
+@import 'src/shared/scss/container';
+.content{
+    width: 100%;
+    min-height: 100vh;
+
+    .mat-table{
+        width: 100%;
+    }
+
+    &__menu{
+        &__title{
+            text-align: center;
+
+            @media only screen and (min-width: 37.5em) {
+                text-align: left;
+                
+            }
+        }
+    }
+}

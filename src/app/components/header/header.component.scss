@@ -1,0 +1,28 @@
+.header {
+  //position: fixed;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem;
+  //background-color: #ae7a47;
+
+  &__icon-button {
+    appearance: none;
+    background-color: transparent;
+
+    &__icon {
+      color: #eadac0;
+    }
+  }
+
+  &__title {
+    color: white;
+  }
+
+  &__spacer {
+    flex: 1 1 auto;
+  }
+
+  &__estimated-delivery {
+  }
+}

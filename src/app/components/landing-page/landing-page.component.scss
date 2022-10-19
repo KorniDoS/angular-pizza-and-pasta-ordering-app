@@ -1,0 +1,203 @@
+@import "src/shared/scss/utils";
+@import "src/shared/scss/animations";
+@import "src/shared/scss/breakpoints";
+@import 'src/shared/scss/colours';
+
+//.team__chefs__chef1 {
+//  figure.team__chefs__figure {
+//   @media only screen and (min-width: $desktop) {
+//    order: 2;
+//   }
+////  }
+//}
+.content {
+  // width: 100%;
+
+  .hero {
+    background: linear-gradient(to right bottom, #d7d2cc, #304352),
+      url("/assets/images/hero.jpg");
+    background-position: bottom;
+    background-size: cover;
+    background-blend-mode: darken;
+
+    height: calc(100vh - 3.5rem);
+
+    @include d-flex-center-column();
+
+    &__title-wrapper {
+      @include d-flex-center-column();
+      &__title {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #eee;
+        //transition: all .5s;
+        //opacity: 0;
+        animation: slideTop 1s ease;
+      }
+
+      &__cta {
+        background-color: $accent;
+        border-radius: 100px;
+        text-decoration: none;
+        color: $primary;
+        transition: all 0.2s;
+        animation: slideBottom 1s 1s ease;
+        animation-fill-mode: backwards;
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: 0 5px 10px #d7d2cc;
+        }
+
+        &:active {
+          transform: translateY(1px);
+          box-shadow: 0 6px 10px #d7d2cc;
+        }
+      }
+    }
+  }
+
+  .family-business {
+    &__title {
+      text-align: center;
+
+      @media only screen and (min-width: $phone) {
+        margin-block: 3rem;
+      }
+    }
+    &__content {
+      @include d-flex-center();
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      @media only screen and (min-width: $desktop) {
+        all: unset;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 100px minmax(1fr, 500px);
+        justify-items: center;
+      }
+
+      .text {
+        max-width: 50ch;
+        //flex-basis: 100%;
+        text-align: left;
+      }
+      .image {
+        //display: block;
+        // width: 100%;
+        max-width: 100%;
+        // height: 100%;
+        //object-fit: cover;
+        object-fit: contain;
+        // width: 100%;
+        //width: 300px;
+        height: 18.75rem;
+      }
+    }
+  }
+
+  .team {
+    //background: linear-gradient(to right bottom, #d7d2cc, #304352);
+    &__title {
+      text-align: center;
+    }
+  }
+
+  .menu-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    &__items {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      row-gap: 2rem;
+    }
+
+    &__button{
+      color: white;
+    }
+  }
+      //width: 400px;
+      //.menu-showcase__item {
+    //    width: 25rem;
+    //    .menu-showcase__card {
+    //      display: flex;
+     //     justify-items: center;
+   //       align-items: center;
+   //       flex-direction: column;
+    //      width: 100%;
+
+   //       .menu-showcase__title {
+  //        }
+
+  //        .menu-showcase__image {
+    //      }
+//
+   //       .menu-showcase__subtitle {
+   //         font-weight: 500;
+  //        }
+ //       }
+//      }
+//    }
+ // }
+
+ .testimonials{
+  width: 100%;
+  color: white;
+  background: linear-gradient(to right bottom, #d7d2cc, #304352), url("/assets/images/testimonial.jpg");
+  background-blend-mode: screen;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  min-height: 31.25rem;
+
+  &__title{
+    font-size: 1.3rem;
+    color: white;
+  }
+  &__clients{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    &__client{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      width: 18.75rem;
+
+      &__name{
+
+      }
+
+      &__photo{
+        width: 6.25rem;
+        height: 6.25rem;
+        border-radius: 50%;
+      }
+
+      &__review{
+
+      }
+    }
+  }
+ }
+}

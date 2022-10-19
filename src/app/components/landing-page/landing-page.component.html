@@ -1,0 +1,136 @@
+<main class="content">
+  <section class="hero u-margin-bottom-medium">
+    <div class="hero__title-wrapper">
+      <h2 class="hero__title-wrapper__title u-margin-block-small">
+        Enjoy Our Fine Italian Cuisine
+      </h2>
+      <a
+        mat-raised-button
+        class="hero__title-wrapper__cta u-button-padding"
+        [routerLink]="['/menu']"
+        >Our Menu</a
+      >
+    </div>
+  </section>
+
+  <section class="container family-business u-margin-bottom-big">
+    <h2 class="family-business__title u-margin-block-small u-button-padding">
+      From generation to generation, for the current generation
+    </h2>
+    <div class="family-business__content">
+      <p class="text u-padding-small">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita
+        perferendis voluptas dignissimos dolorum repudiandae commodi itaque
+        aliquid quis necessitatibus tempore eum, aperiam praesentium illum vel?
+        Autem iure porro soluta eos? A, omnis veritatis, minima iste optio
+        distinctio obcaecati cumque facere quos labore impedit nihil rem veniam
+        perferendis et atque modi ex fugit esse? Repudiandae sequi id soluta
+        architecto error aliquid?
+      </p>
+      <picture>
+        <source
+          media="only screen and (min-width: 37.5em)"
+          srcset="/assets/images/history-small.jpg"
+        />
+        <img
+          class="image"
+          src="/assets/images/history-small.jpg"
+          alt="wood table with flour, oil, aluminium foil and a cloth"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <section class="container team">
+    <h2 class="team__title u-padding-small">Meet the Team</h2>
+    <ng-container *ngFor="let member of team; let i = index">
+      <app-team-member [member]="member" [id]="i"></app-team-member>
+    </ng-container>
+  </section>
+
+  <section class="menu-showcase container">
+    <h3 class="menu-showcase-title u-padding-big">Check Our Menu</h3>
+    <div *ngIf="menu !== []" class="menu-showcase__items">
+      <ng-container *ngFor="let menuItem of menu[0].pizza; let j = index">
+        <app-menu-showcase-item
+        *ngIf="j<3"
+          [menuItem]="menuItem"
+          [id]="j"
+        ></app-menu-showcase-item>
+      </ng-container>
+
+      <ng-container *ngFor="let menuItem of menu[1].pasta; let y = index">
+        <app-menu-showcase-item
+          *ngIf="y<2"
+          [menuItem]="menuItem"
+          [id]="y"
+        ></app-menu-showcase-item>
+      </ng-container>
+    </div>
+    <a
+      class="menu-showcase__button u-margin-block-medium"
+      [routerLink]="['/menu']"
+      mat-flat-button
+      color="primary"
+      >See more <mat-icon>arrow_right_alt</mat-icon></a
+    >
+  </section>
+
+  <section class="testimonials"> 
+    <h4 class="testimonials__title u-padding-big">Testimonials</h4>
+    <div class="testimonials__clients container u-padding-bottom-big"> 
+      
+      <mat-card class="testimonials__clients__client">
+        <mat-card-title class="testimonials__clients__client__name"
+          >Eduard Vandame</mat-card-title
+        >
+        <img
+          mat-card-image
+          class="testimonials__clients__client__photo"
+          src="assets/images/testimonial-1.jpg"
+          alt="Eduard Vandame"
+        />
+        <mat-card-content class="testimonials__clients__client__review">
+          <em>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem odio,
+            quod distinctio deleniti est expedita quaerat architecto blanditiis
+            consequuntur doloremque, pariatur laudantium. Architecto perferendis
+            nisi minus qui assumenda nulla non?" </em>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="testimonials__clients__client">
+        <mat-card-title class="testimonials__clients__client__name"
+          >Maria Giorgio</mat-card-title
+        >
+        <img
+          mat-card-image
+          class="testimonials__clients__client__photo"
+          src="assets/images/testimonial-2.jpg"
+          alt="Maria Giorgio"
+        />
+        <mat-card-content class="testimonials__clients__client__review">
+          <em>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem odio,
+            quod distinctio deleniti est expedita quaerat architecto blanditiis
+            consequuntur doloremque, pariatur laudantium. Architecto perferendis
+            nisi minus qui assumenda nulla non?" </em>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="testimonials__clients__client">
+        <mat-card-title class="testimonials__clients__client__name"
+          >William Shakespeare</mat-card-title
+        >
+        <img
+          mat-card-image
+          class="testimonials__clients__client__photo"
+          src="assets/images/testimonial-3.jpg"
+          alt="William Shakespeare"
+        />
+        <mat-card-content class="testimonials__clients__client__review">
+         <em>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem odio,
+          quod distinctio deleniti est expedita quaerat architecto blanditiis
+          consequuntur doloremque, pariatur laudantium. Architecto perferendis
+          nisi minus qui assumenda nulla non?" </em>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </section>
+</main>

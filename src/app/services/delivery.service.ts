@@ -1,0 +1,54 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+@Injectable({
+  providedIn: 'root'
+})
+export class DeliveryService {
+
+  constructor(private http: HttpClient) { }
+
+  weatherAPIurl = environment.weatherAPIurl;
+
+  getWeather(){
+  return this.http.get(this.weatherAPIurl);
+  }
+
+  returnDeliveryETA(temp: number, rain: number): number{
+
+    let ETA  = 0;
+    let isCold = false;
+    let isRaining = false;
+
+   if(temp < 0 || temp < 19){
+    isCold = true;
+    if(rain >= 0.1){
+      isRaining = true;
+      ETA = 60;
+    }
+
+    if(rain == 0){
+      isRaining = false;
+      ETA = 45
+    }
+
+   } else if (temp > 20){
+    isCold = false;
+
+    if(rain >= 0.1){
+      isRaining = true;
+      ETA = 35
+    }
+
+    if(rain === 0){
+      isRaining = false;
+      ETA = 25;
+    }
+   }
+
+   return ETA;
+
+
+    
+  }
+}

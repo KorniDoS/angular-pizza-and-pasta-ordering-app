@@ -1,0 +1,45 @@
+<main class="cart">
+   
+    <div class="cart__container container" *ngIf="cartItems.length != 0"> 
+        <h1>Cart</h1>
+        <table class="mat-table" mat-table [dataSource]="cartItems" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+                <th mat-header-cell *matHeaderCellDef> Image </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <img class="mat-image" [src]="element.image" alt="">
+                </td>
+              </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          
+          
+    </div>
+
+    <div class="cart__container container" *ngIf="cartItems.length === 0">
+        <h1>Cart</h1>
+        <p>There are currently no items in your cart!</p>
+    </div>
+</main>

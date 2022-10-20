@@ -17,11 +17,20 @@
 
   &__title {
     color: white;
+    margin-right: auto;
+
+    &__span{
+      display: none;
+
+      @media only screen and (min-width: 25.75em){
+        display: inline;
+      }
+    }
   }
 
-  &__spacer {
-    flex: 1 1 auto;
-  }
+ // &__spacer {
+//    flex: 1 1 auto;
+ // }
 
   &__estimated-delivery {
   }

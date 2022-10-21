@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Pasta } from '../models/pasta.model';
+import { Pizza } from '../models/pizza.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private cart: any[]=[];
+  private cart: Pizza[] | Pasta[] = [];
 
-  public _cartSubject$ = new BehaviorSubject<any[]>([]);
+  public _cartSubject$ = new BehaviorSubject<Pizza[] | Pasta[]>([]);
 
   constructor() { 
 
@@ -18,12 +20,12 @@ export class CartService {
     return this.cart.slice();
   }
 
-  addItemToCart(item: any){
+  addItemToCart(item: Pizza | Pasta){
     this.cart.push(item);
     this._cartSubject$.next(this.cart);
   }
 
-  updateCartItem(id: number, item: any ){
+  updateCartItem(id: number, item: Pizza | Pasta ){
     this.cart[id] = item;
     this._cartSubject$.next(this.cart);
   }

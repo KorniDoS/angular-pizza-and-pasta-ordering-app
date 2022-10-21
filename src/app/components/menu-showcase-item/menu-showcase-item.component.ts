@@ -1,3 +1,5 @@
+import { Pasta } from './../../models/pasta.model';
+import { Pizza } from './../../models/pizza.model';
 import { CartService } from './../../services/cart.service';
 
 import { Component, Input, OnInit } from '@angular/core';
@@ -11,7 +13,7 @@ export class MenuShowcaseItemComponent implements OnInit {
   @Input() menuItem!: any;
   @Input() id!: any;
   addedToCart?: boolean;
-  cart: any[] = [];
+  cart: Pizza[] | Pasta[] = [];
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {

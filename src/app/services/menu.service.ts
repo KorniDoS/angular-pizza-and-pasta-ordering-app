@@ -1,3 +1,5 @@
+import { Pasta } from 'src/app/models/pasta.model';
+import { Pizza } from './../models/pizza.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -8,8 +10,8 @@ export class MenuService {
     private menu: any[] = [];
 
     public _menuSubject$ = new BehaviorSubject<any[]>(this.menu);
-    public _pizzaSubject$ = new BehaviorSubject<any[]>([]);
-    public _pastaSubject$ = new BehaviorSubject<any[]>([]);
+    public _pizzaSubject$ = new BehaviorSubject<Pizza[]>([]);
+    public _pastaSubject$ = new BehaviorSubject<Pasta[]>([]);
 
     constructor(private http:HttpClient) { 
 
@@ -41,7 +43,7 @@ export class MenuService {
     }
 
 
-    addPizzaItem(item: any){
+    addPizzaItem(item: Pizza | any){
         this.menu[0].pizza.push(item);
         this._menuSubject$.next(this.menu);
         this._pizzaSubject$.next(this.menu[0].pizza);
@@ -51,14 +53,14 @@ export class MenuService {
         this.menu[0].pizza.splice(id, 1);
     }
 
-    updatePizzaItem(id: number, changes: any){
+    updatePizzaItem(id: number, changes: Pizza){
         this.menu[0].pizza[id] = changes;
         this._pizzaSubject$.next(this.menu[0].pizza);
         this._menuSubject$.next(this.menu);
         console.log(this.menu[0].pizza);
     }
 
-    addPastaItem(item: any){
+    addPastaItem(item: Pizza | any){
         this.menu[1].pasta.push(item);
         this._menuSubject$.next(this.menu);
         this._pastaSubject$.next(this.menu[1].pasta);
@@ -68,7 +70,7 @@ export class MenuService {
         this.menu[1].pasta.splice(id, 1);
     }
 
-    updatePastaItem(id: number, changes: any){
+    updatePastaItem(id: number, changes: Pasta | any){
         this.menu[1].pasta[id] = changes;
         this._pastaSubject$.next(this.menu[1].pasta);
         this._menuSubject$.next(this.menu);

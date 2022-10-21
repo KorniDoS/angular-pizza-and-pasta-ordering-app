@@ -1,3 +1,4 @@
+import { Team } from './../../models/team.model';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./team-member.component.scss']
 })
 export class TeamMemberComponent implements OnInit {
-  @Input() member!: any;
+  @Input() member!: Team;
   @Input() id!: number;
   constructor() { }
 

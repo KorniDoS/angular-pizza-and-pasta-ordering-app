@@ -1,3 +1,5 @@
+import { Pasta } from './../../models/pasta.model';
+import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
@@ -37,11 +39,11 @@ export class WizardComponent implements OnInit {
   pizzaMaximumId: number = 0;
   pastaMaximumId: number = 0;
   menuItems: any[] = [];
-  pizzaMenu: any[] = [];
-  pastaMenu: any[] = [];
-  newItemType?: any;
-  newToppingsArr: any[] = [];
-  newToppingsArrPasta: any[] = [];
+  pizzaMenu: Pizza[] = [];
+  pastaMenu: Pasta[] = [];
+  newItemType?: string | any;
+  newToppingsArr: string[] = [];
+  newToppingsArrPasta: string[] = [];
 
   wizardForm = this.fb.group({
     formArr: this.fb.array([
@@ -83,12 +85,24 @@ export class WizardComponent implements OnInit {
   }
 
   addIngredient() {
-    this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
-    console.log(this.newToppingsArrPasta);
+    let trimmed = this.FormArr?.get([3])?.value.toppings.trim();
+
+    if (trimmed.length === 0) {
+      return;
+    } else {
+      this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
+      console.log(this.newToppingsArrPasta);
+    }
   }
   addTopping() {
-    this.newToppingsArr.push(this.FormArr?.get([2])?.value.toppings);
-    console.log(this.newToppingsArr);
+    let trimmed = this.FormArr?.get([2])?.value.toppings.trim();
+
+    if (trimmed.length === 0) {
+      return;
+    } else {
+      this.newToppingsArr.push(this.FormArr?.get([2])?.value.toppings);
+      console.log(this.newToppingsArr);
+    }
   }
   onFinish() {
     let newItem;

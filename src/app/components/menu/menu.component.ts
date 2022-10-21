@@ -1,3 +1,4 @@
+import { Pizza } from './../../models/pizza.model';
 import {
   AbstractControl,
   FormBuilder,
@@ -21,6 +22,7 @@ import {
   shareReplay,
   switchMap,
 } from 'rxjs';
+import { Pasta } from 'src/app/models/pasta.model';
 
 @Component({
   selector: 'app-menu',
@@ -29,8 +31,8 @@ import {
 })
 export class MenuComponent implements OnInit {
   menuItems: any[] = [];
-  pizzaItems: any[] = [];
-  pastaItems: any[] = [];
+  pizzaItems: Pizza[] = [];
+  pastaItems: Pasta[] = [];
 
   wizardMode?: boolean = false;
   //secondStep: AbstractControlLike;
@@ -60,9 +62,9 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  newItemType?: any;
-  newToppingsArr: any[] = [];
-  newToppingsArrPasta: any[] = [];
+  newItemType?: string;
+  newToppingsArr: string[] = [];
+  newToppingsArrPasta: string[] = [];
   pizzaColumns: string[] = ['position', 'image', 'name', 'toppings', 'price'];
   pastaColumns: string[] = [
     'position',
@@ -82,7 +84,7 @@ export class MenuComponent implements OnInit {
 
   removeData() {}
 
-  onSelectItem(item: any, id: number) {
+  onSelectItem(item: Pizza | Pasta, id: number) {
     console.log(item);
     let dialogRef = this.dialog
       .open(DialogComponent, {

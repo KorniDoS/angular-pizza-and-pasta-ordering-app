@@ -1,3 +1,5 @@
+import { Pasta } from './../../models/pasta.model';
+import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
 import { CartService } from './../../services/cart.service';
 import { Component, OnInit, Inject } from '@angular/core';
@@ -50,7 +52,7 @@ export class DialogComponent implements OnInit {
 
 
 
-  pushTopping(itemType: any) {
+  pushTopping(itemType: string) {
     let trimmed =
       itemType === 'Pizza'
         ? this.pizzaToppingGroup.controls.topping.value?.trim()
@@ -69,16 +71,16 @@ export class DialogComponent implements OnInit {
   completeEditing(item: any, id: any) {
     console.log(id);
     if (item.type === 'Pizza') {
-      let realId = this.menuService.getPizzaMenu().findIndex((item: any)=> item.id === id);
+      let realId = this.menuService.getPizzaMenu().findIndex((item: Pizza)=> item.id === id);
       console.log(realId);
       //let index = id;
-      let editedObject = {
+      let editedObject: Pizza = {
         id: id,
         name: item.name,
         type: item.type,
         toppings: this.toppingsCopy,
-        crust: this.pizzaExtraGroup.controls.crustType.value,
-        size: this.pizzaExtraGroup.controls.size.value,
+        crust: this.pizzaExtraGroup.controls.crustType.value!,
+        size: this.pizzaExtraGroup.controls.size.value!,
         image: item.image,
         price: item.price,
         description: item.description,
@@ -89,8 +91,8 @@ export class DialogComponent implements OnInit {
       this.dialogRef.close();
     } else {
       console.log(id);
-      let realId = this.menuService.getPastaMenu().findIndex((item:any)=> item.id === id);
-      let editedObject = {
+      let realId = this.menuService.getPastaMenu().findIndex((item:Pasta)=> item.id === id);
+      let editedObject: Pasta = {
         id: id,
         name: item.name,
         type: item.type,

@@ -1,3 +1,6 @@
+import { Pasta } from './../../models/pasta.model';
+import { Pizza } from './../../models/pizza.model';
+import { Team } from './../../models/team.model';
 import { TeamService } from './../../services/team.service';
 import { CartService } from './../../services/cart.service';
 import { MenuService } from './../../services/menu.service';
@@ -17,8 +20,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   cartSub$!: Subscription;
 
   menu: any[] = [];
-  cart: any[] = [];
-  team: any[] = [];
+  cart: Pizza[] | Pasta[] = [];
+  team: Team[] = [];
 
   constructor(
     private menuService: MenuService,
@@ -27,17 +30,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-   this.teamSub$ = this.teamService.getTeamMembers().subscribe((team) => {
-     this.team = team;
-  });
-
-
-
+    this.teamSub$ = this.teamService.getTeamMembers().subscribe((team) => {
+      this.team = team;
+    });
 
     this.menuSub$ = this.menuService._menuSubject$.subscribe((res) => {
       this.menu = res;
       console.log(this.menu);
-   });
+    });
   }
 
   ngOnDestroy(): void {

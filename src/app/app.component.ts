@@ -1,3 +1,4 @@
+import { Pizza } from './models/pizza.model';
 import { Subscription } from 'rxjs';
 import { MenuService } from './services/menu.service';
 import { CartService } from './services/cart.service';
@@ -13,6 +14,7 @@ import {
 } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { sanitizeIdentifier } from '@angular/compiler';
+import { Pasta } from './models/pasta.model';
 
 const SMALL_WIDTH_BREAKPOINT = 45; //45em = 700px
 @Component({
@@ -27,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   showSidenav!: boolean;
   isSmall?: boolean;
-  cart: any[] = [];
+  cart: Pizza[] | Pasta[] = [];
 
   navigationLinks: { link: string; icon: string }[] = [
     { link: 'home', icon: 'home' },

@@ -27,14 +27,21 @@ export class WizardComponent implements OnInit {
 
     this.pizzaMenu = this.menuService.getPizzaMenu();
     this.pastaMenu = this.menuService.getPastaMenu();
+
+    this.menuItems = this.menuService.getMenu();
+
+    this.pizzaMaximumId = Math.max(...this.pizzaMenu.map((item) => item.id));
+    this.pastaMaximumId = Math.max(...this.pastaMenu.map((item) => item.id));
   }
+
+  pizzaMaximumId: number = 0;
+  pastaMaximumId: number = 0;
+  menuItems: any[] = [];
   pizzaMenu: any[] = [];
   pastaMenu: any[] = [];
   newItemType?: any;
   newToppingsArr: any[] = [];
   newToppingsArrPasta: any[] = [];
-
-  removeData() {}
 
   wizardForm = this.fb.group({
     formArr: this.fb.array([
@@ -87,9 +94,11 @@ export class WizardComponent implements OnInit {
     let newItem;
     let type = this.FormArr?.value[0]?.type;
 
-
     if (type === 'pizza') {
-      let newIndex =  Math.max(...this.pizzaMenu.map(item => item.id)) + 1;
+      let newIndex =
+        this.pizzaMaximumId > this.pastaMaximumId
+          ? this.pizzaMaximumId + 1
+          : this.pastaMaximumId + 1;
       console.log(newIndex);
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
@@ -110,9 +119,11 @@ export class WizardComponent implements OnInit {
 
       console.log(newItem);
       this.menuService.addPizzaItem(newItem);
-      //  }
     } else if (type === 'pasta') {
-      let newIndex =  Math.max(...this.pastaMenu.map(item => item.id)) + 1;
+      let newIndex =
+        this.pizzaMaximumId > this.pastaMaximumId
+          ? this.pizzaMaximumId + 1
+          : this.pastaMaximumId + 1;
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
       let description = this.FormArr?.value[4]?.description;
@@ -130,7 +141,5 @@ export class WizardComponent implements OnInit {
       this.menuService.addPastaItem(newItem);
       console.log(newItem);
     }
-
-    // console.log(this.FormArr?.value);
   }
 }

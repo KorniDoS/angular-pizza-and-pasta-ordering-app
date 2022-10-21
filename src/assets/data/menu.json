@@ -2,6 +2,7 @@
   {
     "pizza": [
       {
+        "id": 1,
         "name": "Quattro Stagioni",
         "type": "Pizza",
         "toppings": ["tomato sauce", "cheese", "mushrooms", "ham", "olives"],
@@ -12,6 +13,7 @@
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
       },
       {
+        "id": 2,
         "name": "Primavera",
         "type": "Pizza",
         "toppings": ["asparagus", "zucchini", "peas", "mozzarella"],
@@ -22,6 +24,7 @@
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
       },
       {
+        "id": 3,
         "name": "Quattro Formaggi",
         "type": "Pizza",
         "toppings": ["mozzarella", "emmental", "gorgonzola", "ricotta"],
@@ -32,6 +35,7 @@
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
       },
       {
+        "id": 4,
         "name": "Pepperoni",
         "type": "Pizza",
         "toppings": ["pepperoni", "chese", "tomato sauce"],
@@ -42,6 +46,7 @@
         "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione, aliquid aliquam officia quis ducimus eligendi, saepe animi modi a voluptatem esse pariatur fugit at doloremque! Quisquam quos consequuntur officia autem?"
       },
       {
+        "id": 5,
         "name": "Margherita",
         "type": "Pizza",
         "toppings": ["tomato sauce", "chese", "olives"],
@@ -58,6 +63,7 @@
   {
     "pasta": [
       {
+        "id": 6,
         "name": "Penne",
         "type": "Pasta",
         "toppings": ["tomato sauce", "salt"],
@@ -66,6 +72,7 @@
         "price": "8"
       },
       {
+        "id": 7,
         "name": "Spaghetti",
         "type": "Pasta",
         "toppings": ["tomato sauce", "salt", "butter"],
@@ -75,6 +82,7 @@
       }
       ,
       {
+        "id": 8,
         "name": "Fettuccine",
         "type": "Pasta",
         "toppings": ["tomato sauce", "ham"],
@@ -84,6 +92,7 @@
       }
       ,
       {
+        "id": 9,
         "name": "Farfalle",
         "type": "Pasta",
         "toppings": ["salad", "tomatoes", "mushrooms"],
@@ -93,6 +102,7 @@
       }
       ,
       {
+        "id": 10,
         "name": "Macaroni",
         "type": "Pasta",
         "toppings": ["tomato sauce", "cheese"],
@@ -102,6 +112,7 @@
       },
       
       {
+        "id": 11,
         "name": "Fusilli",
         "type": "Pasta",
         "toppings": ["tomato sauce", "green peas", "tuna", "pepper"],
@@ -110,6 +121,7 @@
         "price": "7"
       },
       {
+        "id": 12,
         "name": "Lasagna",
         "type": "Pasta",
         "toppings": ["tomato sauce", "sausages", "cheese", "onions"],

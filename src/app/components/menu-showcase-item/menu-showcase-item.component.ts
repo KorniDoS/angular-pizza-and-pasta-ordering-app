@@ -32,6 +32,7 @@ export class MenuShowcaseItemComponent implements OnInit {
       return;
     } else {
       this.addedToCart = true;
+      item.quantity = 1;
        this.cartService.addItemToCart(item);
     }
    

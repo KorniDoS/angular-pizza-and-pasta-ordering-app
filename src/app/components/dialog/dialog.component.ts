@@ -67,9 +67,13 @@ export class DialogComponent implements OnInit {
   }
 
   completeEditing(item: any, id: any) {
+    console.log(id);
     if (item.type === 'Pizza') {
-      let index = id;
+      let realId = this.menuService.getPizzaMenu().findIndex((item: any)=> item.id === id);
+      console.log(realId);
+      //let index = id;
       let editedObject = {
+        id: id,
         name: item.name,
         type: item.type,
         toppings: this.toppingsCopy,
@@ -78,27 +82,37 @@ export class DialogComponent implements OnInit {
         image: item.image,
         price: item.price,
         description: item.description,
+        quantity: 1
       };
-      this.menuService.updatePizzaItem(index, editedObject);
+      this.menuService.updatePizzaItem(realId, editedObject);
       console.log('Completed editing');
       this.dialogRef.close();
     } else {
-      let index = id;
+      console.log(id);
+      let realId = this.menuService.getPastaMenu().findIndex((item:any)=> item.id === id);
       let editedObject = {
+        id: id,
         name: item.name,
         type: item.type,
         toppings: this.toppingsCopy,
         image: item.image,
         price: item.price,
         description: item.description,
+        quantity: 1
       };
-      this.menuService.updatePastaItem(index, editedObject);
+      this.menuService.updatePastaItem(realId, editedObject);
       console.log('Completed editing');
       this.dialogRef.close();
     }
   }
+
+
   addToCart(item: any) {
-    this.cartService.addItemToCart(item);
+    if(!this.cartService.getCart().includes(item)){
+      item.quantity = 1;
+      this.cartService.addItemToCart(item);
+    }
+
     this.dialogRef.close();
   }
 

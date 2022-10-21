@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import {
   Validators,
   FormBuilder,
@@ -15,11 +16,12 @@ import { MatTable } from '@angular/material/table';
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.scss'],
 })
-export class WizardComponent implements OnInit {
+export class WizardComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder, private menuService: MenuService) {}
 
+  formArrSub$?: Subscription;
   ngOnInit(): void {
-    this.FormArr?.get([0])?.valueChanges.subscribe((res: any) => {
+   this.formArrSub$ = this.FormArr?.get([0])?.valueChanges.subscribe((res: any) => {
       this.newItemType = res;
       //this.wizardForm.reset();
       this.newToppingsArr = [];
@@ -155,5 +157,9 @@ export class WizardComponent implements OnInit {
       this.menuService.addPastaItem(newItem);
       console.log(newItem);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.formArrSub$?.unsubscribe();
   }
 }

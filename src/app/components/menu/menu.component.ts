@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MenuService } from './../../services/menu.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -20,6 +20,7 @@ import {
   of,
   share,
   shareReplay,
+  Subscription,
   switchMap,
 } from 'rxjs';
 import { Pasta } from 'src/app/models/pasta.model';
@@ -29,12 +30,13 @@ import { Pasta } from 'src/app/models/pasta.model';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
   menuItems: any[] = [];
   pizzaItems: Pizza[] = [];
   pastaItems: Pasta[] = [];
 
   wizardMode?: boolean = false;
+  pizzaPastaSub$!: Subscription;
   //secondStep: AbstractControlLike;
   constructor(
     private menuService: MenuService,
@@ -43,7 +45,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.menuService._pizzaSubject$
+    this.pizzaPastaSub$ = this.menuService._pizzaSubject$
       .pipe(
         switchMap((pizza: any) => {
           return combineLatest(of(pizza), this.menuService._pastaSubject$);
@@ -102,5 +104,9 @@ export class MenuComponent implements OnInit {
       });
 
     console.log(dialogRef);
+  }
+
+  ngOnDestroy(): void {
+    this.pizzaPastaSub$.unsubscribe();
   }
 }

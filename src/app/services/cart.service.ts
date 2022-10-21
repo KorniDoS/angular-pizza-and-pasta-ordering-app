@@ -6,18 +6,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class CartService {
-  private cart: {name: string, number: number}[]=[]
+  private cart: any[]=[];
 
-  public _cartSubject$ = new BehaviorSubject<{name: string, number: number}[]>([]);
-  //public readonly todos: Observable<List<Todo>> = this._todos.asObservable();
+  public _cartSubject$ = new BehaviorSubject<any[]>([]);
+
   constructor() { 
 
   }
-
-//initCart(){
- // return this.http.get<any[]>('assets/data/cart.json')
- //no need for initialisation as our cart is empty
- //}
 
   getCart(){
     return this.cart.slice();
@@ -28,7 +23,7 @@ export class CartService {
     this._cartSubject$.next(this.cart);
   }
 
-  updateCartItem(id: number, item: {name: string, number: number} ){
+  updateCartItem(id: number, item: any ){
     this.cart[id] = item;
     this._cartSubject$.next(this.cart);
   }

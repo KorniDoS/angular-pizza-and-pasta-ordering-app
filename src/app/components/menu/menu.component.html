@@ -129,7 +129,7 @@
         (click)="createNew()"
         class="demo-button u-margin-block-small"
       >
-        <span *ngIf="!wizardMode">Create new item</span>
+        <span *ngIf="!wizardMode" [ngClass]="{'u-white': !wizardMode}">Create new item</span>
         <span *ngIf="wizardMode">Back to menu</span>
       </button>
     </div>

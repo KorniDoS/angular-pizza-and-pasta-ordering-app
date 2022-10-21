@@ -16,6 +16,7 @@ import {
 import { isNgTemplate } from '@angular/compiler';
 import { MatCellDef, MatTable } from '@angular/material/table';
 import { MatTab } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -32,7 +33,7 @@ export class CartComponent implements OnInit, OnDestroy {
   @ViewChild('table') table!: MatTable<any>;
 
   @ViewChildren('price') matCells?: QueryList<any>;
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService, private router: Router) {}
   ngOnInit(): void {
     this.cartSub$ = this.cartService._cartSubject$.subscribe((response) => {
       this.cartItems = response;
@@ -85,7 +86,15 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm){
+    console.log(form.value);
+    alert('Order sent successfully!');
+    form.resetForm();
+    setTimeout(()=>{
+      this.router.navigate(['/home']);
+    }, 1000)
 
+    //this.cartService.
+    this.cartService.emptyCart();
   }
 
   ngOnDestroy(): void {

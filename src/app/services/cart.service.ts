@@ -32,4 +32,9 @@ export class CartService {
     this.cart.splice(id, 1);
     this._cartSubject$.next(this.cart);
   }
+
+  emptyCart(){
+    this.cart = [];
+    this._cartSubject$.next(this.cart);
+  }
 }

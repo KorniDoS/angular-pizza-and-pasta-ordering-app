@@ -1,3 +1,4 @@
+import { SnackbarService } from './services/snackbar.service';
 import { Pizza } from './models/pizza.model';
 import { Subscription } from 'rxjs';
 import { MenuService } from './services/menu.service';
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit, OnDestroy {
   showSidenav!: boolean;
   isSmall?: boolean;
   cart: Pizza[] | Pasta[] = [];
+  initialLoad: boolean = true;
+  initialLoadCounter: number = 0;
 
   navigationLinks: { link: string; icon: string }[] = [
     { link: 'home', icon: 'home' },
@@ -45,12 +48,26 @@ export class AppComponent implements OnInit, OnDestroy {
     private menuService: MenuService,
     private breakpointObs: BreakpointObserver,
     private renderer: Renderer2,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private snackbarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
    this.cartServiceSub$ = this.cartService._cartSubject$.subscribe((cartItems) => {
       this.cart = cartItems;
+
+    //  if(this.initialLoad === true){
+        //this.initialLoad = false;
+       // this.initialLoadCounter++;
+       // this.initialLoad = false;
+        //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
+      //}
+
+     // if(this.initialLoad === false && this.initialLoadCounter === 2){
+       // this.snackbarService.openSnackBar('New items added to cart!', 'OK');
+      //}
+      //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
+      
       console.log(this.cart);
     });
     this.sideNavSub$ = this.toggleSidenavService.toggled.subscribe((res) => {

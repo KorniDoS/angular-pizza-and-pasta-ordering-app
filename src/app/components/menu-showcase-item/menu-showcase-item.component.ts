@@ -1,8 +1,10 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
 import { CartService } from './../../services/cart.service';
 
 import { Component, Input, OnInit } from '@angular/core';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-menu-showcase-item',
@@ -14,7 +16,7 @@ export class MenuShowcaseItemComponent implements OnInit {
   @Input() id!: any;
   addedToCart?: boolean;
   cart: Pizza[] | Pasta[] = [];
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
 
@@ -35,6 +37,7 @@ export class MenuShowcaseItemComponent implements OnInit {
     } else {
       this.addedToCart = true;
       item.quantity = 1;
+      this.snackbarService.openSnackBar(`${item.name} added to cart!`, 'OK');
        this.cartService.addItemToCart(item);
     }
    

@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CartService } from './../../services/cart.service';
@@ -33,7 +34,7 @@ export class CartComponent implements OnInit, OnDestroy {
   @ViewChild('table') table!: MatTable<any>;
 
   @ViewChildren('price') matCells?: QueryList<any>;
-  constructor(public cartService: CartService, private router: Router) {}
+  constructor(public cartService: CartService, private router: Router, private snackbarService: SnackbarService) {}
   ngOnInit(): void {
     this.cartSub$ = this.cartService._cartSubject$.subscribe((response) => {
       this.cartItems = response;
@@ -56,6 +57,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
     let goodId = this.cartItems.findIndex(item=> item.id === id);
     console.log(goodId);
+    this.snackbarService.openSnackBar(`${item.name} deleted from cart`, 'OK');
     this.cartService.deleteItemFromCart(goodId);
     this.total = 0;
     this.cartItems
@@ -87,11 +89,12 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm){
     console.log(form.value);
-    alert('Order sent successfully!');
+   // alert('Order sent successfully!');
+   this.snackbarService.openSnackBar('Order sent successfully! You will now be redirected to the home page!', 'Great!');
     form.resetForm();
     setTimeout(()=>{
       this.router.navigate(['/home']);
-    }, 1000)
+    }, 1500)
 
     //this.cartService.
     this.cartService.emptyCart();

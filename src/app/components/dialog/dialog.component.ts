@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
@@ -21,7 +22,8 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private menuService: MenuService,
     private cartService: CartService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private snackBarService: SnackbarService
   ) {}
 
   ngOnInit(): void {
@@ -87,6 +89,7 @@ export class DialogComponent implements OnInit {
         quantity: 1
       };
       this.menuService.updatePizzaItem(realId, editedObject);
+      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK');
       console.log('Completed editing');
       this.dialogRef.close();
     } else {
@@ -103,6 +106,7 @@ export class DialogComponent implements OnInit {
         quantity: 1
       };
       this.menuService.updatePastaItem(realId, editedObject);
+      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK');
       console.log('Completed editing');
       this.dialogRef.close();
     }
@@ -113,6 +117,8 @@ export class DialogComponent implements OnInit {
     if(!this.cartService.getCart().includes(item)){
       item.quantity = 1;
       this.cartService.addItemToCart(item);
+      this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK');
+      //this.SnackbarService
     }
 
     this.dialogRef.close();

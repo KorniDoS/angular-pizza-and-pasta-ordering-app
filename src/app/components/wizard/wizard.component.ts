@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../services/snackbar.service';
 import { Subscription } from 'rxjs';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
@@ -17,7 +18,7 @@ import { MatTable } from '@angular/material/table';
   styleUrls: ['./wizard.component.scss'],
 })
 export class WizardComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private menuService: MenuService) {}
+  constructor(private fb: FormBuilder, private menuService: MenuService, private snackbarService: SnackbarService) {}
 
   formArrSub$?: Subscription;
   ngOnInit(): void {
@@ -135,6 +136,7 @@ export class WizardComponent implements OnInit, OnDestroy {
 
       console.log(newItem);
       this.menuService.addPizzaItem(newItem);
+      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK');
     } else if (type === 'pasta') {
       let newIndex =
         this.pizzaMaximumId > this.pastaMaximumId
@@ -155,6 +157,7 @@ export class WizardComponent implements OnInit, OnDestroy {
       };
 
       this.menuService.addPastaItem(newItem);
+      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK');
       console.log(newItem);
     }
   }

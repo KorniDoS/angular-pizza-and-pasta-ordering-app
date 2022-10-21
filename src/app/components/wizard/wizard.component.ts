@@ -24,8 +24,12 @@ export class WizardComponent implements OnInit {
       this.newToppingsArrPasta = [];
       console.log(this.newItemType);
     });
-  }
 
+    this.pizzaMenu = this.menuService.getPizzaMenu();
+    this.pastaMenu = this.menuService.getPastaMenu();
+  }
+  pizzaMenu: any[] = [];
+  pastaMenu: any[] = [];
   newItemType?: any;
   newToppingsArr: any[] = [];
   newToppingsArrPasta: any[] = [];
@@ -83,13 +87,17 @@ export class WizardComponent implements OnInit {
     let newItem;
     let type = this.FormArr?.value[0]?.type;
 
+
     if (type === 'pizza') {
+      let newIndex =  Math.max(...this.pizzaMenu.map(item => item.id)) + 1;
+      console.log(newIndex);
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
       let crustType = this.FormArr?.value[2]?.crustType;
       let size = this.FormArr?.value[2]?.size;
 
       newItem = {
+        id: newIndex,
         name: name,
         type: 'Pizza',
         price: price,
@@ -104,11 +112,13 @@ export class WizardComponent implements OnInit {
       this.menuService.addPizzaItem(newItem);
       //  }
     } else if (type === 'pasta') {
+      let newIndex =  Math.max(...this.pastaMenu.map(item => item.id)) + 1;
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
       let description = this.FormArr?.value[4]?.description;
 
       newItem = {
+        id: newIndex,
         name: name,
         type: 'Pasta',
         price: price,

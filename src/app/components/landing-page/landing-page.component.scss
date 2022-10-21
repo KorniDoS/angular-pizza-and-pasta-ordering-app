@@ -1,7 +1,7 @@
 @import "src/shared/scss/utils";
 @import "src/shared/scss/animations";
 @import "src/shared/scss/breakpoints";
-@import 'src/shared/scss/colours';
+@import "src/shared/scss/colours";
 
 //.team__chefs__chef1 {
 //  figure.team__chefs__figure {
@@ -124,80 +124,79 @@
       row-gap: 2rem;
     }
 
-    &__button{
+    &__button {
       color: white;
     }
   }
-      //width: 400px;
-      //.menu-showcase__item {
-    //    width: 25rem;
-    //    .menu-showcase__card {
-    //      display: flex;
-     //     justify-items: center;
-   //       align-items: center;
-   //       flex-direction: column;
-    //      width: 100%;
+  //width: 400px;
+  //.menu-showcase__item {
+  //    width: 25rem;
+  //    .menu-showcase__card {
+  //      display: flex;
+  //     justify-items: center;
+  //       align-items: center;
+  //       flex-direction: column;
+  //      width: 100%;
 
-   //       .menu-showcase__title {
+  //       .menu-showcase__title {
   //        }
 
   //        .menu-showcase__image {
-    //      }
-//
-   //       .menu-showcase__subtitle {
-   //         font-weight: 500;
+  //      }
+  //
+  //       .menu-showcase__subtitle {
+  //         font-weight: 500;
   //        }
- //       }
-//      }
-//    }
- // }
+  //       }
+  //      }
+  //    }
+  // }
 
- .testimonials{
-  width: 100%;
-  color: white;
-  background: linear-gradient(to right bottom, #d7d2cc, #304352), url("/assets/images/testimonial.jpg");
-  background-blend-mode: screen;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  min-height: 31.25rem;
-
-  &__title{
-    font-size: 1.3rem;
+  .testimonials {
+    width: 100%;
     color: white;
-  }
-  &__clients{
+    background: linear-gradient(to right bottom, #d7d2cc, #304352),
+      url("/assets/images/testimonial.jpg");
+    background-blend-mode: screen;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    &__client{
+    flex-direction: column;
+
+    min-height: 31.25rem;
+
+    &__title {
+      font-size: 1.3rem;
+      color: white;
+    }
+    &__clients {
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 2rem;
+      &__client {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
-      width: 18.75rem;
+        width: 18.75rem;
 
-      &__name{
+        &__name {
+        }
 
-      }
+        &__photo {
+          width: 6.25rem;
+          height: 6.25rem;
+          border-radius: 50%;
+        }
 
-      &__photo{
-        width: 6.25rem;
-        height: 6.25rem;
-        border-radius: 50%;
-      }
-
-      &__review{
-
+        &__review {
+        }
       }
     }
   }
- }
 }

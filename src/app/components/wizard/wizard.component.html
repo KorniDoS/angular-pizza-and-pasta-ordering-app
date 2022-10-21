@@ -194,8 +194,8 @@
       <ng-template matStepLabel>Done</ng-template>
       <p>You are now done!</p>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">OK</button>
+        <button mat-button matStepperPrevious color=warn>Back</button>
+        <button mat-button (click)="stepper.reset()" class="u-bg-green u-white">OK</button>
       </div>
     </mat-step>
 

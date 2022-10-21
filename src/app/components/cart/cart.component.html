@@ -1,19 +1,9 @@
 <main class="cart">
-  - display the list of items, with the possibility of removing items,
-  increase/decrease quantity
-  <br />
-
-  - when clicking the checkout button, go to a form where the user fills in its
-  details (name, email, phone number, address)
-  <br />
-
-  - the order is sent after filling in the form and clicking the finish order
-  button
   <div
     class="cart__container container"
     *ngIf="cartItems.length != 0 && showCheckoutForm === false"
   >
-    <h1>Cart</h1>
+    <h1 class="u-margin-block-medium">Cart</h1>
     <table
       class="mat-table"
       mat-table
@@ -28,10 +18,14 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element; let y = index">
-          {{ element.name }}
-          <button mat-raised-button color="warn" (click)="onDelete(element, element.id)">
+          <button
+            mat-mini-fab
+            color="warn"
+            (click)="onDelete(element, element.id)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
+          | {{ element.name }}
         </td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
@@ -80,42 +74,113 @@
       <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
     </table>
 
-    <button mat-raised-button class="" (click)="onCheckout()">Checkout</button>
+    <div class="checkout-wrapper">
+      <button
+        mat-raised-button
+        class="u-bg-green u-white"
+        (click)="onCheckout()"
+      >
+        Checkout
+      </button>
+    </div>
   </div>
 
   <div class="cart__container container" *ngIf="cartItems.length === 0">
-    <h1>Cart</h1>
+    <h1 class="u-margin-block-medium">Cart</h1>
     <p>There are currently no items in your cart!</p>
   </div>
 
   <div class="checkout-form__container container" *ngIf="showCheckoutForm">
     <h1 class="u-margin-block-medium">Checkout form</h1>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-      <div class="container">  
-        <mat-label class="u-margi">Name</mat-label>
-      <mat-form-field appearance="fill">
-        <input matInput ngForm type="text" required minlength="6">
+      <div class="container">
+        <div class="wrapper">
+          <mat-form-field class="u-margin-bottom-small" appearance="fill">
+            <mat-label class="u-margin-bottom-small">Name</mat-label>
+            <input
+              matInput
+              name="name"
+              ngModel
+              type="text"
+              required
+              minlength="10"
+              #name="ngModel"
+            />
+            <span *ngIf="name.invalid && name.touched"
+              >Please enter at least 10 characters.</span
+            >
+          </mat-form-field>
 
-      </mat-form-field>
+          <mat-form-field class="u-margin-bottom-small" appearance="fill">
+            <mat-label class="u-margin-bottom-small">Email</mat-label>
+            <input
+              matInput
+              name="email"
+              ngModel
+              type="text"
+              required
+              minlength="10"
+              email
+              #email="ngModel"
+            />
+            <span *ngIf="email.invalid && email.touched"
+              >Please enter a valid email.</span
+            >
+          </mat-form-field>
 
-      <mat-label>Email</mat-label>
-      <mat-form-field appearance="fill">
-        <input matInput ngForm type="text" required minlength="6" email>
-        
-      </mat-form-field>
+          <mat-form-field class="u-margin-bottom-small" appearance="fill">
+            <mat-label class="u-margin-bottom-small">Address</mat-label>
+            <input
+              matInput
+              name="address"
+              ngModel
+              type="text"
+              required
+              minlength="20"
+              #address="ngModel"
+            />
+            <span *ngIf="address.invalid && address.touched"
+              >Please enter you address.</span
+            >
+          </mat-form-field>
 
-      <mat-label>Address</mat-label>
-      <mat-form-field appearance="fill">
-        <input matInput ngForm type="text" required minlength="6">
-        
-      </mat-form-field>
+          <mat-form-field class="u-margin-bottom-small" appearance="fill">
+            <mat-label class="u-margin-bottom-small">Telephone</mat-label>
+            <input
+              matInput
+              name="telephone"
+              ngModel
+              type="text"
+              required
+              minlength="10"
+              pattern="^[0-9]*$"
+              #telephone="ngModel"
+            />
+            <span *ngIf="telephone.invalid && telephone.touched"
+              >Please enter a valid telephone number.</span
+            >
+          </mat-form-field>
 
-      <mat-label>Telephone</mat-label>
-      <mat-form-field appearance="fill">
-        <input matInput ngForm type="text" required minlength="6">
-        
-      </mat-form-field></div>
-    
+          <div class="total container">
+            <div class="actions container">
+              <button mat-raised-button color="warn" (click)="onCheckout()">
+                Back
+              </button>
+              <button
+                mat-raised-button
+                type="submit"
+                class="send-order u-margin-left-small u-bg-green u-white"
+                [disabled]="form.invalid"
+              >
+                Send order
+              </button>
+            </div>
+          </div>
+          <div class="u-margin-top-small">
+            <strong>Total: {{ total | currency: "EUR" }}</strong>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </main>

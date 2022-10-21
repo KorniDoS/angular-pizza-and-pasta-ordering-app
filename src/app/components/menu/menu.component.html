@@ -124,6 +124,7 @@
 
     <div class="demo-button-container">
       <button
+        [ngClass]="{'u-bg-green u-white':!wizardMode, 'u-bg-red u-white': wizardMode}"
         mat-raised-button
         (click)="createNew()"
         class="demo-button u-margin-block-small"

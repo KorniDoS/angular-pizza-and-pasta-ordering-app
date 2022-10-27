@@ -65,7 +65,8 @@
           </table>
 
           <mat-paginator
-            [pageSizeOptions]="[3, 5, 10]"
+            [pageSizeOptions]="[3, 5, 10, 100]"
+            [pageSize]="5"
             showFirstLastButtons
             aria-label="Select page of pizzas"
             #pizzaPaginator
@@ -129,7 +130,8 @@
           </table>
 
           <mat-paginator
-            [pageSizeOptions]="[3, 5, 10]"
+            [pageSizeOptions]="[3, 5, 10, 100]"
+            [pageSize]="5"
             showFirstLastButtons
             aria-label="Select page of pastas"
             #pastaPaginator
@@ -140,7 +142,7 @@
     </div>
 
     <div class="wizard container" *ngIf="wizardMode">
-      <app-wizard></app-wizard>
+      <app-wizard (done)="onWizardDone($event)"></app-wizard>
     </div>
 
     <div class="demo-button-container">
@@ -153,10 +155,10 @@
         (click)="createNew()"
         class="demo-button u-margin-block-small"
       >
-        <span *ngIf="!wizardMode" [ngClass]="{ 'u-white': !wizardMode }"
-          >Create new item</span
-        >
-        <span *ngIf="wizardMode">Back to menu</span>
+        <span class="d-flex" *ngIf="!wizardMode" [ngClass]="{ 'u-white': !wizardMode }"
+          >Create new item
+        <mat-icon>local_pizza</mat-icon></span>
+        <span class="d-flex" *ngIf="wizardMode"><mat-icon>arrow_back</mat-icon>Back to menu</span>
       </button>
     </div>
   </div>

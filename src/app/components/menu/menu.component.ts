@@ -105,4 +105,8 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.pizzaPastaSub$.unsubscribe();
   }
+
+  onWizardDone(event: boolean){
+    this.wizardMode = false;
+  }
 }

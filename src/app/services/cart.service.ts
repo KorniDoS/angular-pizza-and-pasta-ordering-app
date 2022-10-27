@@ -30,9 +30,15 @@ export class CartService {
     this._cartSubject$.next(this.cart);
   }
 
-  deleteItemFromCart(id: number){
-    this.cart.splice(id, 1);
+  deleteItemFromCart(id: number, item: Pizza | Pasta){
+    let found = this.cart.indexOf(item);
+    if(found === -1){
+      return;
+    } else {
+    this.cart.splice(found, 1);
     this._cartSubject$.next(this.cart);
+    }
+   
   }
 
   emptyCart(){

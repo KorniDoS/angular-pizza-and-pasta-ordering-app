@@ -24,11 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.log(precipitation);
         console.log(res['current_weather']);
 
-        this.ETA = this.deliveryService.returnDeliveryETA(actualTemp, precipitation);
+        this.eta = this.deliveryService.returnDeliveryETA(actualTemp, precipitation);
       }
     )
   }
-  ETA?: number;
+  eta?: number;
   isToggled = false;
   
   onToggle(){

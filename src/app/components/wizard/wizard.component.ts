@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
-import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core';
 import {
   Validators,
   FormBuilder,
@@ -47,6 +47,8 @@ export class WizardComponent implements OnInit, OnDestroy {
   newItemType?: string | any;
   newToppingsArr: string[] = [];
   newToppingsArrPasta: string[] = [];
+
+  @Output() done: EventEmitter<boolean>= new EventEmitter<boolean>();
 
   wizardForm = this.fb.group({
     formArr: this.fb.array([
@@ -93,7 +95,14 @@ export class WizardComponent implements OnInit, OnDestroy {
     if (trimmed.length === 0) {
       return;
     } else {
-      this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
+      if(this.newToppingsArrPasta.includes(this.FormArr?.get([3])?.value.toppings.toLowerCase())){
+        this.snackbarService.openSnackBar("Can't add the same ingredient twice or more!", 'OK', 5000);
+      } else {
+
+        this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings.toLowerCase());
+        this.snackbarService.openSnackBar(`${this.FormArr?.get([3])?.value.toppings} added as ingredient.`, 'OK', 2000);
+      }
+     // this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
       console.log(this.newToppingsArrPasta);
     }
   }
@@ -103,7 +112,15 @@ export class WizardComponent implements OnInit, OnDestroy {
     if (trimmed.length === 0) {
       return;
     } else {
-      this.newToppingsArr.push(this.FormArr?.get([2])?.value.toppings);
+      if(this.newToppingsArr.includes(this.FormArr?.get([2])?.value.toppings.toLowerCase())){
+        this.snackbarService.openSnackBar("Can't add the same topping twice or more!", 'OK', 5000);
+        return;
+      } else {
+
+        this.newToppingsArr.push(this.FormArr?.get([2])?.value.toppings.toLowerCase());
+        this.snackbarService.openSnackBar(`${this.FormArr?.get([2])?.value.toppings} added as topping.`, 'OK', 2000);
+      }       
+   
       console.log(this.newToppingsArr);
     }
   }
@@ -160,6 +177,9 @@ export class WizardComponent implements OnInit, OnDestroy {
       this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK', 5000);
       console.log(newItem);
     }
+
+    this.done.emit(true);
+
   }
 
   ngOnDestroy(): void {

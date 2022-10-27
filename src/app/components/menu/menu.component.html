@@ -1,122 +1,143 @@
 <main class="content">
   <div class="content__menu container">
-    <h1 class="content__menu__title u-margin-block-medium" *ngIf="!wizardMode">Menu</h1>
+    <h1 class="content__menu__title u-margin-block-medium" *ngIf="!wizardMode">
+      Menu
+    </h1>
     <h1 class="content__menu__title u-margin-block-medium" *ngIf="wizardMode">
       Let's create a new product!
     </h1>
 
-    <mat-tab-group *ngIf="!wizardMode">
-      <mat-tab label="Pizza">
-        <table
-          mat-table
-          [dataSource]="pizzaItems"
-          class="mat-elevation-z8"
-          *ngIf="!!pizzaItems"
-          #pizzaTable
-        >
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-          </ng-container>
-          <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef>Image</th>
-            <td mat-cell *matCellDef="let element">
-              <img
-                [src]="element?.image"
-                alt=""
-                style="height: 50px; width: 50px"
-              />
-            </td>
-          </ng-container>
+    <div class="tab-group-wrapper" [hidden]="wizardMode">
+      <mat-tab-group>
+        <mat-tab label="Pizza">
+          <table
+            mat-table
+            [dataSource]="pizzaItemsDataSource"
+            class="mat-elevation-z8"
+            *ngIf="!!pizzaItems"
+            #pizzaTable
+          >
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef>Image</th>
+              <td mat-cell *matCellDef="let element">
+                <img
+                  [src]="element?.image"
+                  alt=""
+                  style="height: 50px; width: 50px"
+                />
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
-          </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+            </ng-container>
 
-          <ng-container matColumnDef="toppings">
-            <th mat-header-cell *matHeaderCellDef>Toppings</th>
-            <td mat-cell *matCellDef="let element">
-              <span *ngFor="let topping of element?.toppings; let k = index"
-                >{{ topping | titlecase
-                }}<span *ngIf="k < element?.toppings?.length - 1"
-                  >,
-                </span></span
-              >
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="toppings">
+              <th mat-header-cell *matHeaderCellDef>Toppings</th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngFor="let topping of element?.toppings; let k = index"
+                  >{{ topping | titlecase
+                  }}<span *ngIf="k < element?.toppings?.length - 1"
+                    >,
+                  </span></span
+                >
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element?.price | currency: "EUR" }}
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.price | currency: "EUR" }}
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="pizzaColumns"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: pizzaColumns; let k = index"
-            (click)="onSelectItem(row, row.id)"
-          ></tr>
-        </table>
-      </mat-tab>
+            <tr mat-header-row *matHeaderRowDef="pizzaColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: pizzaColumns; let k = index"
+              (click)="onSelectItem(row, row.id)"
+            ></tr>
+          </table>
 
-      <mat-tab label="Pasta">
-        <table
-          mat-table
-          [dataSource]="pastaItems"
-          class="mat-elevation-z8"
-          *ngIf="!!pastaItems"
-          #pastaTable
-        >
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-          </ng-container>
-          <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef>Image</th>
-            <td mat-cell *matCellDef="let element">
-              <img
-                [src]="element?.image"
-                alt=""
-                style="height: 50px; width: 50px"
-              />
-            </td>
-          </ng-container>
+          <mat-paginator
+            [pageSizeOptions]="[3, 5, 10]"
+            showFirstLastButtons
+            aria-label="Select page of pizzas"
+            #pizzaPaginator
+          >
+          </mat-paginator>
+        </mat-tab>
 
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
-          </ng-container>
-          <ng-container matColumnDef="ingredients">
-            <th mat-header-cell *matHeaderCellDef>Ingredients</th>
-            <td mat-cell *matCellDef="let element">
-              <span *ngFor="let ingredient of element?.toppings; let i = index"
-                >{{ ingredient | titlecase
-                }}<span *ngIf="i < element?.toppings?.length - 1"
-                  >,
-                </span></span
-              >
-            </td>
-          </ng-container>
+        <mat-tab label="Pasta">
+          <table
+            mat-table
+            [dataSource]="pastaItemsDataSource"
+            class="mat-elevation-z8"
+            *ngIf="!!pastaItems"
+            #pastaTable
+          >
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef>Image</th>
+              <td mat-cell *matCellDef="let element">
+                <img
+                  [src]="element?.image"
+                  alt=""
+                  style="height: 50px; width: 50px"
+                />
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>Price</th>
-            <td mat-cell *matCellDef="let element">
-              {{ element?.price | currency: "EUR" }}
-            </td>
-          </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">{{ element?.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="ingredients">
+              <th mat-header-cell *matHeaderCellDef>Ingredients</th>
+              <td mat-cell *matCellDef="let element">
+                <span
+                  *ngFor="let ingredient of element?.toppings; let i = index"
+                  >{{ ingredient | titlecase
+                  }}<span *ngIf="i < element?.toppings?.length - 1"
+                    >,
+                  </span></span
+                >
+              </td>
+            </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="pastaColumns"></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: pastaColumns; let x = index"
-            (click)="onSelectItem(row, row.id)"
-          ></tr>
-        </table>
-      </mat-tab>
-    </mat-tab-group>
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element?.price | currency: "EUR" }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="pastaColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: pastaColumns; let x = index"
+              (click)="onSelectItem(row, row.id)"
+            ></tr>
+          </table>
+
+          <mat-paginator
+            [pageSizeOptions]="[3, 5, 10]"
+            showFirstLastButtons
+            aria-label="Select page of pastas"
+            #pastaPaginator
+          >
+          </mat-paginator>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
 
     <div class="wizard container" *ngIf="wizardMode">
       <app-wizard></app-wizard>
@@ -124,12 +145,17 @@
 
     <div class="demo-button-container">
       <button
-        [ngClass]="{'u-bg-green u-white':!wizardMode, 'u-bg-red u-white': wizardMode}"
+        [ngClass]="{
+          'u-bg-green u-white': !wizardMode,
+          'u-bg-red u-white': wizardMode
+        }"
         mat-raised-button
         (click)="createNew()"
         class="demo-button u-margin-block-small"
       >
-        <span *ngIf="!wizardMode" [ngClass]="{'u-white': !wizardMode}">Create new item</span>
+        <span *ngIf="!wizardMode" [ngClass]="{ 'u-white': !wizardMode }"
+          >Create new item</span
+        >
         <span *ngIf="wizardMode">Back to menu</span>
       </button>
     </div>

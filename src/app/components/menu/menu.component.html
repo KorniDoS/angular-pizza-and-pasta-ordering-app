@@ -148,8 +148,8 @@
     <div class="demo-button-container">
       <button
         [ngClass]="{
-          'u-bg-green u-white': !wizardMode,
-          'u-bg-red u-white': wizardMode
+          'u-bg-primary u-white': !wizardMode,
+          'u-bg-accent u-primary': wizardMode
         }"
         mat-raised-button
         (click)="createNew()"
@@ -163,3 +163,8 @@
     </div>
   </div>
 </main>
+<ngx-spinner
+type="ball-spin"
+bdColor="#eadac0"
+color="#ae7a47"
+></ngx-spinner>

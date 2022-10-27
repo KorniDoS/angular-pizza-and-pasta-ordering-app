@@ -2,6 +2,8 @@ import { SnackbarService } from './../../services/snackbar.service';
 import { NgForm, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CartService } from './../../services/cart.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { tap } from 'rxjs';
 import {
   Component,
   OnInit,
@@ -14,8 +16,12 @@ import {
   AfterContentInit,
   ViewChild,
 } from '@angular/core';
-import { isNgTemplate } from '@angular/compiler';
-import { MatCellDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { isNgTemplate, ThisReceiver } from '@angular/compiler';
+import {
+  MatCellDef,
+  MatTable,
+  MatTableDataSource,
+} from '@angular/material/table';
 import { MatTab } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 
@@ -31,34 +37,53 @@ export class CartComponent implements OnInit, OnDestroy {
   total: number = 0;
   once: boolean = false;
   showCheckoutForm: boolean = false;
-  dataSource = new MatTableDataSource<any>(this.cartItems);
+  //dataSource = new MatTableDataSource<any>(this.cartItems);
   @ViewChild('table') table!: MatTable<any>;
 
   @ViewChildren('price') matCells?: QueryList<any>;
-  constructor(public cartService: CartService, private router: Router, private snackbarService: SnackbarService) {}
+  constructor(
+    public cartService: CartService,
+    private router: Router,
+    private snackbarService: SnackbarService,
+    private spinner: NgxSpinnerService
+  ) {}
   ngOnInit(): void {
-    this.cartSub$ = this.cartService._cartSubject$.subscribe((response) => {
-      this.cartItems = response;
-      //console.log(this.cartItems);
+    this.cartSub$ = this.cartService._cartSubject$
+      .pipe(
+        tap(() => {
+          if (this.once === false) this.spinner.show();
+        })
+      )
+      .subscribe((response) => {
+        this.cartItems = response;
+        //console.log(this.cartItems);
 
-      if (this.once === false) {
-        this.cartItems
-          .map((t) => [t.price, t.quantity])
-          .forEach((item) => {
-            this.total = this.total + Number(item[0]) * Number(item[1]);
+        if (this.once === false) {
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 1000);
 
-            this.once = true;
-          });
-      }
-    });
+          this.cartItems
+            .map((t) => [t.price, t.quantity])
+            .forEach((item) => {
+              this.total = this.total + Number(item[0]) * Number(item[1]);
+
+              this.once = true;
+            });
+        }
+      });
   }
 
-  onDelete(item: any, id:number) {
-   // console.log(id);
+  onDelete(item: any, id: number) {
+    // console.log(id);
 
-    let goodId = this.cartItems.findIndex(item=> item.id === id);
+    let goodId = this.cartItems.findIndex((item) => item.id === id);
     console.log(goodId);
-    this.snackbarService.openSnackBar(`${item.name} deleted from cart`, 'OK', 5000);
+    this.snackbarService.openSnackBar(
+      `${item.name} deleted from cart`,
+      'OK',
+      5000
+    );
     this.cartService.deleteItemFromCart(goodId, item);
     this.total = 0;
     this.cartItems
@@ -69,15 +94,14 @@ export class CartComponent implements OnInit, OnDestroy {
     //this.cartService.updateCartItem(goodId, item);
     this.table.renderRows();
     //console.log(item, id);
-
   }
 
-  onCheckout(){
+  onCheckout() {
     this.showCheckoutForm = !this.showCheckoutForm;
   }
 
   onChanged(id: any, element: any) {
-    let realId = this.cartItems.findIndex(item=> item.id === id);
+    let realId = this.cartItems.findIndex((item) => item.id === id);
     this.total = 0;
     this.cartService.updateCartItem(realId, element);
     this.cartItems
@@ -85,17 +109,20 @@ export class CartComponent implements OnInit, OnDestroy {
       .forEach((item) => {
         this.total = this.total + Number(item[0]) * Number(item[1]);
       });
-    
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     console.log(form.value);
-   // alert('Order sent successfully!');
-   this.snackbarService.openSnackBar('Order sent successfully! You will now be redirected to the home page!', 'Great!', 5000);
+    // alert('Order sent successfully!');
+    this.snackbarService.openSnackBar(
+      'Order sent successfully! You will now be redirected to the home page!',
+      'Great!',
+      5000
+    );
     form.resetForm();
-    setTimeout(()=>{
+    setTimeout(() => {
       this.router.navigate(['/home']);
-    }, 1500)
+    }, 1500);
 
     //this.cartService.
     this.cartService.emptyCart();

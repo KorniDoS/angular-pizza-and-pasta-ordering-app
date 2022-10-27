@@ -2,6 +2,7 @@ import { Pizza } from './../../models/pizza.model';
 import { FormBuilder } from '@angular/forms';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MenuService } from './../../services/menu.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {
   Component,
   OnInit,
@@ -18,6 +19,7 @@ import {
   shareReplay,
   Subscription,
   switchMap,
+  tap,
 } from 'rxjs';
 import { Pasta } from 'src/app/models/pasta.model';
 import { MatPaginator } from '@angular/material/paginator';
@@ -58,12 +60,14 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private menuService: MenuService,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
     this.pizzaPastaSub$ = this.menuService._pizzaSubject$
       .pipe(
+        tap(()=>this.spinner.show()),
         switchMap((pizza: any) => {
           return combineLatest(of(pizza), this.menuService._pastaSubject$);
         }),
@@ -78,6 +82,11 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.pizzaItemsDataSource.data = this.pizzaItems;
         this.pastaItemsDataSource.data = this.pastaItems;
+
+        setTimeout(()=>{
+        this.spinner.hide();
+        }, 1000)
+       
       });
   }
 

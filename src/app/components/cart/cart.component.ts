@@ -15,7 +15,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { isNgTemplate } from '@angular/compiler';
-import { MatCellDef, MatTable } from '@angular/material/table';
+import { MatCellDef, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatTab } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 
@@ -31,6 +31,7 @@ export class CartComponent implements OnInit, OnDestroy {
   total: number = 0;
   once: boolean = false;
   showCheckoutForm: boolean = false;
+  dataSource = new MatTableDataSource<any>(this.cartItems);
   @ViewChild('table') table!: MatTable<any>;
 
   @ViewChildren('price') matCells?: QueryList<any>;
@@ -58,7 +59,7 @@ export class CartComponent implements OnInit, OnDestroy {
     let goodId = this.cartItems.findIndex(item=> item.id === id);
     console.log(goodId);
     this.snackbarService.openSnackBar(`${item.name} deleted from cart`, 'OK', 5000);
-    this.cartService.deleteItemFromCart(goodId);
+    this.cartService.deleteItemFromCart(goodId, item);
     this.total = 0;
     this.cartItems
       .map((t) => [t.price, t.quantity])

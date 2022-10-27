@@ -1,21 +1,30 @@
-@import 'src/shared/scss/utils';
-@import 'src/shared/scss/container';
-.content{
+@import "src/shared/scss/utils";
+@import "src/shared/scss/container";
+@import "src/shared/scss/colours";
+.content {
+  width: 100%;
+  min-height: 100vh;
+
+  .mat-table {
     width: 100%;
-    min-height: 100vh;
 
-    .mat-table{
-        width: 100%;
+    tr.mat-row {
+      transition: all 0.25s ease;
     }
-
-    &__menu{
-        &__title{
-            text-align: center;
-
-            @media only screen and (min-width: 37.5em) {
-                text-align: left;
-                
-            }
-        }
+    tr.mat-row:hover {
+      background-color: $accent;
+      color: $primary;
+      cursor: pointer;
     }
+  }
+
+  &__menu {
+    &__title {
+      text-align: center;
+
+      @media only screen and (min-width: 37.5em) {
+        text-align: left;
+      }
+    }
+  }
 }

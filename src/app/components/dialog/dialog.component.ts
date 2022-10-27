@@ -89,7 +89,7 @@ export class DialogComponent implements OnInit {
         quantity: 1
       };
       this.menuService.updatePizzaItem(realId, editedObject);
-      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK');
+      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK', 5000);
       console.log('Completed editing');
       this.dialogRef.close();
     } else {
@@ -106,7 +106,7 @@ export class DialogComponent implements OnInit {
         quantity: 1
       };
       this.menuService.updatePastaItem(realId, editedObject);
-      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK');
+      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK', 5000);
       console.log('Completed editing');
       this.dialogRef.close();
     }
@@ -117,7 +117,7 @@ export class DialogComponent implements OnInit {
     if(!this.cartService.getCart().includes(item)){
       item.quantity = 1;
       this.cartService.addItemToCart(item);
-      this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK');
+      this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK', 5000);
       //this.SnackbarService
     }
 

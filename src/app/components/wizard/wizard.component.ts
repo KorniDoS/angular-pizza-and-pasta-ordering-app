@@ -136,7 +136,7 @@ export class WizardComponent implements OnInit, OnDestroy {
 
       console.log(newItem);
       this.menuService.addPizzaItem(newItem);
-      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK');
+      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK', 5000);
     } else if (type === 'pasta') {
       let newIndex =
         this.pizzaMaximumId > this.pastaMaximumId
@@ -157,7 +157,7 @@ export class WizardComponent implements OnInit, OnDestroy {
       };
 
       this.menuService.addPastaItem(newItem);
-      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK');
+      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK', 5000);
       console.log(newItem);
     }
   }

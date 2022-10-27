@@ -37,7 +37,7 @@ export class MenuShowcaseItemComponent implements OnInit {
     } else {
       this.addedToCart = true;
       item.quantity = 1;
-      this.snackbarService.openSnackBar(`${item.name} added to cart!`, 'OK');
+      this.snackbarService.openSnackBar(`${item.name} added to cart!`, 'OK', 5000);
        this.cartService.addItemToCart(item);
     }
    

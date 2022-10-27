@@ -57,7 +57,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
     let goodId = this.cartItems.findIndex(item=> item.id === id);
     console.log(goodId);
-    this.snackbarService.openSnackBar(`${item.name} deleted from cart`, 'OK');
+    this.snackbarService.openSnackBar(`${item.name} deleted from cart`, 'OK', 5000);
     this.cartService.deleteItemFromCart(goodId);
     this.total = 0;
     this.cartItems
@@ -90,7 +90,7 @@ export class CartComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm){
     console.log(form.value);
    // alert('Order sent successfully!');
-   this.snackbarService.openSnackBar('Order sent successfully! You will now be redirected to the home page!', 'Great!');
+   this.snackbarService.openSnackBar('Order sent successfully! You will now be redirected to the home page!', 'Great!', 5000);
     form.resetForm();
     setTimeout(()=>{
       this.router.navigate(['/home']);

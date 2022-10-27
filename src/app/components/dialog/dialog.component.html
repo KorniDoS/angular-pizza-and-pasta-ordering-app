@@ -31,11 +31,15 @@
     </div>
   </div>
   <div class="actions">
-    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">     
+     <mat-icon>edit</mat-icon>
       Edit
+
     </button>
     <button mat-raised-button color="primary" class="u-white" (click)="addToCart(data.item)">
+      <mat-icon>add_shopping_cart</mat-icon>
       Add to cart
+      
     </button>
   </div>
 </div>
@@ -131,6 +135,7 @@
   </div>
   <div class="actions">
     <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
+    <mat-icon>edit</mat-icon>
       Edit
     </button>
     <button
@@ -140,6 +145,7 @@
       [disabled]="editMode"
       (click)="addToCart(data.item)"
     >
+    <mat-icon>add_shopping_cart</mat-icon>
       Add to cart
     </button>
   </div>
@@ -176,9 +182,11 @@
   </div>
   <div class="actions">
     <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
+      <mat-icon>edit</mat-icon>
       Edit
     </button>
     <button mat-raised-button color="primary" class="u-white" (click)="addToCart(data.item)">
+      <mat-icon>add_shopping_cart</mat-icon>
       Add to cart
     </button>
   </div>
@@ -241,6 +249,7 @@
   </div>
   <div class="actions">
     <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
+      <mat-icon>edit</mat-icon>
       Edit
     </button>
     <button
@@ -250,6 +259,7 @@
       [disabled]="editMode"
       (click)="addToCart(data.item)"
     >
+    <mat-icon>add_shopping_cart</mat-icon>
       Add to cart
     </button>
   </div>

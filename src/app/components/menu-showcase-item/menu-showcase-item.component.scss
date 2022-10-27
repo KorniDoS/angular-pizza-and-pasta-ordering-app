@@ -21,12 +21,22 @@
       }
 
       .menu-showcase__actions{
+        width: 30%;
         .menu-showcase__actions-button{
           color: $primary;
         }
 
         .menu-showcase__actions-button--added{
-          color: white;
+          color: $accent;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-direction: row;
+          background-color: $primary;
+          //padding: 0 16px;
+          //min-width: 64px;
+          line-height: 50px;
+          border-radius: 6px;
         }
       }
     }

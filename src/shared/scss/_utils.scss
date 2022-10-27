@@ -3,7 +3,7 @@ $medium: 2rem;
 $big: 4rem;
 $huge: 6rem;
 
-@import './colours';
+@import "./colours";
 
 @mixin d-flex-center {
   display: flex;
@@ -66,9 +66,8 @@ $huge: 6rem;
   margin-block-end: $huge;
 }
 
-.u-margin-left-small{
-margin-inline-start: $small;
-
+.u-margin-left-small {
+  margin-inline-start: $small;
 }
 
 .u-padding-small {
@@ -83,9 +82,7 @@ margin-inline-start: $small;
   padding: $big;
 }
 
-
-
-.u-padding-bottom-big{
+.u-padding-bottom-big {
   padding-block-end: $big;
 }
 
@@ -93,38 +90,43 @@ margin-inline-start: $small;
   padding: 0.6rem 2rem;
 }
 
-
-.u-white{
+.u-white {
   color: white !important;
 }
 
-.u-black{
+.u-black {
   color: black !important;
 }
 
-.u-primary{
+.u-primary {
   color: $primary !important;
 }
 
-.u-accent{
+.u-accent {
   color: $accent !important;
 }
-.u-green{
+.u-green {
   color: $green !important;
 }
-.u-red{
+.u-red {
   color: #d9534f !important;
 }
 
-.u-bg-green{
+.u-bg-primary {
+  background-color: $primary !important;
+}
+.u-bg-accent {
+  background-color: $accent !important;
+}
+.u-bg-green {
   background-color: $green !important;
 }
 
-.u-bg-red{
+.u-bg-red {
   background-color: #d9534f !important;
 }
 
-.d-flex{
+.d-flex {
   display: flex;
   justify-content: center;
   align-items: center;

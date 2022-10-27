@@ -31,10 +31,10 @@
     </div>
   </div>
   <div class="actions">
-    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
       Edit
     </button>
-    <button mat-raised-button color="accent" class="u-primary" (click)="addToCart(data.item)">
+    <button mat-raised-button color="primary" class="u-white" (click)="addToCart(data.item)">
       Add to cart
     </button>
   </div>
@@ -105,8 +105,8 @@
           </mat-form-field>
 
           <div>
-            <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
-            <button mat-raised-button matStepperNext class="u-margin-left-small u-primary" color="accent">Next</button>
+            <button mat-raised-button matStepperPrevious class="u-margin-top-small u-primary" color="accent">Back</button>
+            <button mat-raised-button matStepperNext class="u-margin-left-small u-white" color="primary">Next</button>
           </div>
         </form>
       </mat-step>
@@ -116,9 +116,9 @@
           You are now done. Save your changes or discard them.
         </p>
         <div>
-          <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
+          <button mat-raised-button matStepperPrevious class="u-margin-top-small u-primary" color="accent">Back</button>
           <button
-          class="u-margin-left-small u-accent"
+          class="u-margin-left-small u-white"
           color="primary"
             mat-raised-button
             (click)="completeEditing(data.item, data.item.id)"
@@ -130,12 +130,13 @@
     </mat-stepper>
   </div>
   <div class="actions">
-    <button mat-raised-button color="primary" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
       Edit
     </button>
     <button
+      class="u-white"
       mat-raised-button
-      color="accent"
+      color="primary"
       [disabled]="editMode"
       (click)="addToCart(data.item)"
     >
@@ -174,10 +175,10 @@
     </div>
   </div>
   <div class="actions">
-    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
       Edit
     </button>
-    <button mat-raised-button color="accent" class="u-primary" (click)="addToCart(data.item)">
+    <button mat-raised-button color="primary" class="u-white" (click)="addToCart(data.item)">
       Add to cart
     </button>
   </div>
@@ -225,9 +226,9 @@
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done. Save your changes or discard them</p>
         <div>
-          <button mat-raised-button matStepperPrevious class="u-margin-top-small" color="warn">Back</button>
+          <button mat-raised-button matStepperPrevious class="u-margin-top-small u-primary" color="accent">Back</button>
           <button
-          class="u-margin-top-small u-margin-left-small u-accent"
+          class="u-margin-top-small u-margin-left-small u-white"
           color="primary"
             mat-raised-button
             (click)="completeEditing(data.item, data.item.id)"
@@ -239,13 +240,13 @@
     </mat-stepper>
   </div>
   <div class="actions">
-    <button mat-raised-button color="primary" class="u-accent" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
       Edit
     </button>
     <button
       mat-raised-button
-      color="accent"
-      class="u-primary"
+      color="primary"
+      class="u-white"
       [disabled]="editMode"
       (click)="addToCart(data.item)"
     >

@@ -6,7 +6,7 @@
     #sidenav
   >
     <mat-nav-list>
-      <mat-list-item *ngFor="let link of navigationLinks">
+      <mat-list-item *ngFor="let link of navigationLinks" [routerLink]="[link.link]">
         <a matLine [routerLink]="[link.link]">{{ link.link | titlecase }}</a>
         <a [routerLink]="[link.link]" mat-icon-button>
           <mat-icon *ngIf="link.link === 'cart'; else default" [matBadge]="cart.length" matBadgeColor="accent">{{ link.icon }}</mat-icon>

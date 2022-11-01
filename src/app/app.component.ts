@@ -56,33 +56,33 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authService.autoLogin();
-   this.cartServiceSub$ = this.cartService._cartSubject$.subscribe((cartItems) => {
-      this.cart = cartItems;
+    this.cartServiceSub$ = this.cartService._cartSubject$.subscribe(
+      (cartItems) => {
+        this.cart = cartItems;
 
-    //  if(this.initialLoad === true){
+        //  if(this.initialLoad === true){
         //this.initialLoad = false;
-       // this.initialLoadCounter++;
-       // this.initialLoad = false;
+        // this.initialLoadCounter++;
+        // this.initialLoad = false;
         //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-      //}
+        //}
 
-     // if(this.initialLoad === false && this.initialLoadCounter === 2){
-       // this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-      //}
-      //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-      
-      console.log(this.cart);
-    });
+        // if(this.initialLoad === false && this.initialLoadCounter === 2){
+        // this.snackbarService.openSnackBar('New items added to cart!', 'OK');
+        //}
+        //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
+
+        console.log(this.cart);
+      }
+    );
     this.sideNavSub$ = this.toggleSidenavService.toggled.subscribe((res) => {
       this.showSidenav = res;
       console.log(res);
     });
 
-    this.menuService._menuSubject$.subscribe(
-      res=>{
-        console.log(res);
-      }
-   )
+    this.menuService._menuSubject$.subscribe((res) => {
+      console.log(res);
+    });
 
     this.breakpointObs$ = this.breakpointObs
       .observe([`(max-width: ${SMALL_WIDTH_BREAKPOINT}em)`])
@@ -98,28 +98,6 @@ export class AppComponent implements OnInit, OnDestroy {
           this.toggleSidenavService.toggled.next(this.showSidenav);
         }
       });
-
-    let lastKnownScrollPosition = 0;
-    let ticking = false;
-
-    document.addEventListener('scroll', (e) => {
-      lastKnownScrollPosition = window.scrollY;
-
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          this.doSomething(lastKnownScrollPosition);
-          ticking = false;
-        });
-
-        ticking = true;
-      }
-    });
-  }
-  doSomething(scrollPos: any) {
-    // Do something with the scroll position
-    let navigation = this.sidenav._content.nativeElement.children[0];
-    this.renderer.setStyle(navigation, 'translate', `0px ${scrollPos}px`);
-    //console.log();
   }
   ngOnDestroy(): void {
     this.breakpointObs$.unsubscribe();

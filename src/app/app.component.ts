@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { SnackbarService } from './services/snackbar.service';
 import { Pizza } from './models/pizza.model';
 import { Subscription } from 'rxjs';
@@ -49,10 +50,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private breakpointObs: BreakpointObserver,
     private renderer: Renderer2,
     private elementRef: ElementRef,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.authService.autoLogin();
    this.cartServiceSub$ = this.cartService._cartSubject$.subscribe((cartItems) => {
       this.cart = cartItems;
 

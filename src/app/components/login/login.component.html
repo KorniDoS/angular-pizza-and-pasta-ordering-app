@@ -1,0 +1,23 @@
+<div class="container d-flex login" >
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="d-flex form">
+        <h1 class="u-margin-bottom-medium">{{loginMode ? 'Login': 'Sign Up'}}</h1>
+        <mat-form-field appearance="fill" class="u-margin-bottom-small">
+            <mat-label>Username</mat-label>
+            <input matInput required [(ngModel)]="username" name="username" #usernameModel="ngModel" minlength="4" maxlength="20">
+            <span *ngIf="usernameModel.invalid && usernameModel.touched">Please enter your username.</span>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="u-margin-bottom-small">
+            <mat-label>Password</mat-label>
+            <input matInput required [(ngModel)]="password" #passwordModel="ngModel" name="password" type="password" pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}/((.*[A-Z])((.*[a-z].*\d)|(.*\d.*[a-z])).*)|((.*[a-z])((.*[A-Z].*\d)|(.*\d.*[A-Z])).*)|((.*\d)((.*[a-z].*[A-Z])|(.*[A-Z].*[a-z])).*)//^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]{8,}$/">
+            <span *ngIf="!passwordModel.valid && passwordModel.touched">Your password is too weak.</span>
+        </mat-form-field>
+
+        <button mat-raised-button class="u-white u-margin-bottom-small" color="primary"type="submit" [disabled]="form.invalid">{{loginMode ?
+        'Login' : 'Sign me up'}}</button>
+
+    </form>
+
+    <button type="button" mat-raised-button color="accent" class="u-primary u-margin-top-small" (click)="onModeToggle()">{{loginMode ? 'Create new account' : 'Already have an account? Sign In!'}}</button>
+</div>

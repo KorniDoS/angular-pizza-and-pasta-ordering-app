@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { MenuComponent } from './components/menu/menu.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   {path: 'home', component: LandingPageComponent},
   {path: 'menu', component: MenuComponent},
   {path: 'cart', component: CartComponent},

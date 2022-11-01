@@ -19,6 +19,7 @@ import { WizardComponent } from './components/wizard/wizard.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     WizardComponent,
     ContactComponent,
     CartComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

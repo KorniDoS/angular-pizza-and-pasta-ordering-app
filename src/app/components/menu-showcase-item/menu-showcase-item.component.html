@@ -7,11 +7,11 @@
         <span *ngFor="let topping of menuItem.toppings; let k = index">{{topping | titlecase}}<span *ngIf="k < menuItem.toppings.length - 1">, </span></span>
       </mat-card-content>
       <mat-card-actions class="menu-showcase__actions u-margin-bottom-small">
-        <button [color]="addedToCart ? 'primary' : 'accent'" mat-raised-button class="menu-showcase__actions-button" *ngIf="!addedToCart" (click)="onAddToCartToggle()">Add to cart</button>
+        <!-- <button [color]="addedToCart ? 'primary' : 'accent'" mat-raised-button class="menu-showcase__actions-button" *ngIf="!addedToCart" (click)="onAddToCartToggle()">Add to cart</button> -->
         <div class="menu-showcase__actions-button--added" *ngIf="addedToCart">
-          <button mat-mini-fab (click)="onDecrease()" class="d-flex"><mat-icon class="u-primary">remove</mat-icon></button>
+          <!-- <button mat-mini-fab (click)="onDecrease()" class="d-flex"><mat-icon class="u-primary">remove</mat-icon></button>
           <span class="d-flex">{{menuItem.quantity}} </span>
-          <button mat-mini-fab (click)="onIncrease()" class="d-flex"><mat-icon class="u-primary">add</mat-icon></button>
+          <button mat-mini-fab (click)="onIncrease()" class="d-flex"><mat-icon class="u-primary">add</mat-icon></button> -->
         </div>
       </mat-card-actions>
     </mat-card>
@@ -24,11 +24,11 @@
         <span *ngFor="let ingredient of menuItem.toppings; let k = index">{{ingredient | titlecase}}<span *ngIf="k < menuItem.toppings.length - 1">, </span></span>
       </mat-card-content>
       <mat-card-actions class="menu-showcase__actions u-margin-bottom-small">
-        <button [color]="addedToCart ? 'primary' : 'accent'" mat-raised-button class="menu-showcase__actions-button" *ngIf="!addedToCart" (click)="onAddToCartToggle()">Add to cart</button>
+        <!-- <button [color]="addedToCart ? 'primary' : 'accent'" mat-raised-button class="menu-showcase__actions-button" *ngIf="!addedToCart" (click)="onAddToCartToggle()">Add to cart</button> -->
         <div class="menu-showcase__actions-button--added" *ngIf="addedToCart">
-          <button mat-mini-fab (click)="onDecrease()" class="d-flex"><mat-icon class="u-primary">remove</mat-icon></button>
+          <!-- <button mat-mini-fab (click)="onDecrease()" class="d-flex"><mat-icon class="u-primary">remove</mat-icon></button>
           <span class="d-flex">{{menuItem.quantity}} </span>
-          <button mat-mini-fab (click)="onIncrease()" class="d-flex"><mat-icon class="u-primary">add</mat-icon></button>
+          <button mat-mini-fab (click)="onIncrease()" class="d-flex"><mat-icon class="u-primary">add</mat-icon></button> -->
         </div>
       </mat-card-actions>
     </mat-card>

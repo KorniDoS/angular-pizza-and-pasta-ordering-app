@@ -8,7 +8,7 @@ export class Cart{
     id: string;
 
     @Column('jsonb', {nullable: true})
-    products: {id: string, quantity: string | number}[];
+    products: {id: string, type: string, quantity: string | number}[];
 
 
     //one to one

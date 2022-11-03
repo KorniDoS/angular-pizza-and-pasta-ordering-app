@@ -14,6 +14,9 @@ export class Pasta {
   @Column()
   image: string;
 
+  @Column()
+  type: string = 'Pasta';
+
   @Column('simple-array')
   toppings: string[];
 

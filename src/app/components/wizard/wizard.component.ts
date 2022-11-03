@@ -3,7 +3,15 @@ import { Subscription } from 'rxjs';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
 import { MenuService } from './../../services/menu.service';
-import { Component, Input, OnInit, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import {
   Validators,
   FormBuilder,
@@ -18,37 +26,35 @@ import { MatTable } from '@angular/material/table';
   styleUrls: ['./wizard.component.scss'],
 })
 export class WizardComponent implements OnInit, OnDestroy {
-  constructor(private fb: FormBuilder, private menuService: MenuService, private snackbarService: SnackbarService) {}
+  constructor(
+    private fb: FormBuilder,
+    private menuService: MenuService,
+    private snackbarService: SnackbarService
+  ) {}
 
   formArrSub$?: Subscription;
   ngOnInit(): void {
-   this.formArrSub$ = this.FormArr?.get([0])?.valueChanges.subscribe((res: any) => {
-      this.newItemType = res;
-      //this.wizardForm.reset();
-      this.newToppingsArr = [];
-      this.newToppingsArrPasta = [];
-      console.log(this.newItemType);
-    });
-
-    this.pizzaMenu = this.menuService.getPizzaMenu();
-    this.pastaMenu = this.menuService.getPastaMenu();
-
-    this.menuItems = this.menuService.getMenu();
-
-    this.pizzaMaximumId = Math.max(...this.pizzaMenu.map((item) => item.id));
-    this.pastaMaximumId = Math.max(...this.pastaMenu.map((item) => item.id));
+    this.formArrSub$ = this.FormArr?.get([0])?.valueChanges.subscribe(
+      (res: any) => {
+        this.newItemType = res;
+        //this.wizardForm.reset();
+        this.newToppingsArr = [];
+        this.newToppingsArrPasta = [];
+        //console.log(this.newItemType);
+      }
+    );
   }
 
-  pizzaMaximumId: number = 0;
-  pastaMaximumId: number = 0;
-  menuItems: any[] = [];
-  pizzaMenu: Pizza[] = [];
-  pastaMenu: Pasta[] = [];
+  // pizzaMaximumId: number = 0;
+  // pastaMaximumId: number = 0;
+  // menuItems: any[] = [];
+  //pizzaMenu: Pizza[] = [];
+  //pastaMenu: Pasta[] = [];
   newItemType?: string | any;
   newToppingsArr: string[] = [];
   newToppingsArrPasta: string[] = [];
 
-  @Output() done: EventEmitter<boolean>= new EventEmitter<boolean>();
+  @Output() done: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   wizardForm = this.fb.group({
     formArr: this.fb.array([
@@ -95,14 +101,27 @@ export class WizardComponent implements OnInit, OnDestroy {
     if (trimmed.length === 0) {
       return;
     } else {
-      if(this.newToppingsArrPasta.includes(this.FormArr?.get([3])?.value.toppings.toLowerCase())){
-        this.snackbarService.openSnackBar("Can't add the same ingredient twice or more!", 'OK', 5000);
+      if (
+        this.newToppingsArrPasta.includes(
+          this.FormArr?.get([3])?.value.toppings.toLowerCase()
+        )
+      ) {
+        this.snackbarService.openSnackBar(
+          "Can't add the same ingredient twice or more!",
+          'OK',
+          5000
+        );
       } else {
-
-        this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings.toLowerCase());
-        this.snackbarService.openSnackBar(`${this.FormArr?.get([3])?.value.toppings} added as ingredient.`, 'OK', 2000);
+        this.newToppingsArrPasta.push(
+          this.FormArr?.get([3])?.value.toppings.toLowerCase()
+        );
+        this.snackbarService.openSnackBar(
+          `${this.FormArr?.get([3])?.value.toppings} added as ingredient.`,
+          'OK',
+          2000
+        );
       }
-     // this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
+      // this.newToppingsArrPasta.push(this.FormArr?.get([3])?.value.toppings);
       console.log(this.newToppingsArrPasta);
     }
   }
@@ -112,35 +131,49 @@ export class WizardComponent implements OnInit, OnDestroy {
     if (trimmed.length === 0) {
       return;
     } else {
-      if(this.newToppingsArr.includes(this.FormArr?.get([2])?.value.toppings.toLowerCase())){
-        this.snackbarService.openSnackBar("Can't add the same topping twice or more!", 'OK', 5000);
+      if (
+        this.newToppingsArr.includes(
+          this.FormArr?.get([2])?.value.toppings.toLowerCase()
+        )
+      ) {
+        this.snackbarService.openSnackBar(
+          "Can't add the same topping twice or more!",
+          'OK',
+          5000
+        );
         return;
       } else {
+        this.newToppingsArr.push(
+          this.FormArr?.get([2])?.value.toppings.toLowerCase()
+        );
+        this.snackbarService.openSnackBar(
+          `${this.FormArr?.get([2])?.value.toppings} added as topping.`,
+          'OK',
+          2000
+        );
+      }
 
-        this.newToppingsArr.push(this.FormArr?.get([2])?.value.toppings.toLowerCase());
-        this.snackbarService.openSnackBar(`${this.FormArr?.get([2])?.value.toppings} added as topping.`, 'OK', 2000);
-      }       
-   
       console.log(this.newToppingsArr);
     }
   }
+
   onFinish() {
     let newItem;
     let type = this.FormArr?.value[0]?.type;
 
     if (type === 'pizza') {
-      let newIndex =
-        this.pizzaMaximumId > this.pastaMaximumId
-          ? this.pizzaMaximumId + 1
-          : this.pastaMaximumId + 1;
-      console.log(newIndex);
+      // let newIndex =
+      //   this.pizzaMaximumId > this.pastaMaximumId
+      //     ? this.pizzaMaximumId + 1
+      //     : this.pastaMaximumId + 1;
+      // console.log(newIndex);
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
       let crustType = this.FormArr?.value[2]?.crustType;
       let size = this.FormArr?.value[2]?.size;
 
       newItem = {
-        id: newIndex,
+        // id: newIndex,
         name: name,
         type: 'Pizza',
         price: price,
@@ -152,19 +185,25 @@ export class WizardComponent implements OnInit, OnDestroy {
       };
 
       console.log(newItem);
-      this.menuService.addPizzaItem(newItem);
-      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK', 5000);
+      this.menuService.addPizzaItem(newItem).subscribe((res) => {
+        console.log('Successfully added');
+        this.menuService.newItems.next(null);
+      });
+      this.snackbarService.openSnackBar(
+        `${newItem.name} added into the menu!`,
+        'OK',
+        5000
+      );
     } else if (type === 'pasta') {
-      let newIndex =
-        this.pizzaMaximumId > this.pastaMaximumId
-          ? this.pizzaMaximumId + 1
-          : this.pastaMaximumId + 1;
+      // let newIndex =
+      //   this.pizzaMaximumId > this.pastaMaximumId
+      //     ? this.pizzaMaximumId + 1
+      //     : this.pastaMaximumId + 1;
       let name = this.FormArr?.value[1]?.name;
       let price = this.FormArr?.value[1]?.price;
       let description = this.FormArr?.value[4]?.description;
 
       newItem = {
-        id: newIndex,
         name: name,
         type: 'Pasta',
         price: price,
@@ -173,13 +212,19 @@ export class WizardComponent implements OnInit, OnDestroy {
         description: description,
       };
 
-      this.menuService.addPastaItem(newItem);
-      this.snackbarService.openSnackBar(`${newItem.name} added into the menu!`, 'OK', 5000);
+      this.menuService.addPastaItem(newItem).subscribe((res) => {
+        this.menuService.newItems.next(null);
+      });
+
+      this.snackbarService.openSnackBar(
+        `${newItem.name} added into the menu!`,
+        'OK',
+        5000
+      );
       console.log(newItem);
     }
 
     this.done.emit(true);
-
   }
 
   ngOnDestroy(): void {

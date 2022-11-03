@@ -25,13 +25,13 @@
         <strong>Size: </strong>{{ data.item?.size }}
       </p>
       <p class="dialog__description">
-        <strong>Crust type: </strong>{{ data.item?.crust }}
+        <strong>Crust type: </strong>{{ data.item?.crustType }}
       </p>
      
     </div>
   </div>
   <div class="actions">
-    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">     
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()" [disabled]="isAdmin === false && data.item?.global === 1">     
      <mat-icon>edit</mat-icon>
       Edit
 
@@ -181,7 +181,7 @@
     </div>
   </div>
   <div class="actions">
-    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()">
+    <button mat-raised-button color="accent" class="u-primary" (click)="toggleEditMode()" [disabled]="isAdmin === false && data.item?.global === 1">
       <mat-icon>edit</mat-icon>
       Edit
     </button>

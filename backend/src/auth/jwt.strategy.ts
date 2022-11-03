@@ -1,4 +1,4 @@
-import { JwtPayload } from './../../dist/auth/dto/jwt-payload.dto.d';
+import { JwtPayload } from './jwt-payload';
 import { UsersRepository } from './users.repository';
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
     }
 
     async validate(payload: JwtPayload): Promise<User>{
-        const {username} = payload;
+        const {username, userRole} = payload;
         const user: User = await this.usersRepository.findOne({where: {username}});
 
         if(!user){

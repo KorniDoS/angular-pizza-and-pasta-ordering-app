@@ -48,21 +48,27 @@ export class CartComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService
   ) {}
   ngOnInit(): void {
-    this.cartSub$ = this.cartService._cartSubject$
-      .pipe(
-        tap(() => {
-          if (this.once === false) this.spinner.show();
-        })
-      )
-      .subscribe((response) => {
-        this.cartItems = response;
+  //  this.cartSub$ = this.cartService._cartSubject$
+   //   .pipe(
+     //   tap(() => {
+     //     if (this.once === false) this.spinner.show();
+     //   })
+    //  )
+     // .subscribe((response) => {
+    //    this.cartItems = response;
         //console.log(this.cartItems);
 
-        if (this.once === false) {
-          setTimeout(() => {
-            this.spinner.hide();
-          }, 1000);
+      //  if (this.once === false) {
+       //   setTimeout(() => {
+       //     this.spinner.hide();
+       //   }, 1000);
 
+       this.cartService.getCart().subscribe((res: any)=>{
+        console.log('I got the cart!');
+        console.log(res);
+
+        this.cartItems = res["products"];
+       })
           this.cartItems
             .map((t) => [t.price, t.quantity])
             .forEach((item) => {
@@ -70,8 +76,8 @@ export class CartComponent implements OnInit, OnDestroy {
 
               this.once = true;
             });
-        }
-      });
+      //  }
+     // });
   }
 
   onDelete(item: any, id: number) {

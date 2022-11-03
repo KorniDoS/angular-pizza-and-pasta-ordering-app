@@ -24,7 +24,7 @@ export class PizzasService {
 
   async getPizzaById(item_id: string, user: User): Promise<any>{
 
-    return this.pizzaRepository.getPizzaById(item_id);
+    return this.pizzaRepository.getPizzaById(item_id, user);
     //const { id } = user;
 
 

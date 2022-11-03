@@ -10,7 +10,7 @@
 
         <mat-form-field appearance="fill" class="u-margin-bottom-small">
             <mat-label>Password</mat-label>
-            <input matInput required [(ngModel)]="password" #passwordModel="ngModel" name="password" type="password" pattern="(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}/((.*[A-Z])((.*[a-z].*\d)|(.*\d.*[a-z])).*)|((.*[a-z])((.*[A-Z].*\d)|(.*\d.*[A-Z])).*)|((.*\d)((.*[a-z].*[A-Z])|(.*[A-Z].*[a-z])).*)//^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[\S]{8,}$/">
+            <input matInput required [(ngModel)]="password" #passwordModel="ngModel" name="password" type="password" [pattern]="loginMode=== false ? regex : ''">
             <span *ngIf="!passwordModel.valid && passwordModel.touched">Your password is too weak.</span>
         </mat-form-field>
 

@@ -3,26 +3,51 @@ import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Pasta } from '../models/pasta.model';
 import { Pizza } from '../models/pizza.model';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  backendApi: string = environment.backendAPIbaseUrl;
+  changes = new BehaviorSubject<any>(null);
   private cart: Pizza[] | Pasta[] = [];
 
   public _cartSubject$ = new BehaviorSubject<Pizza[] | Pasta[]>([]);
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
 
   }
 
-  getCart(){
+  initCart(){
+    return this.http.post(this.backendApi + '/cart/init',{});
+  }
+
+  getLocalCart(){
     return this.cart.slice();
   }
 
+
+  getCart(){
+    //this.http.get(environment.backendAPIbaseUrl + '')
+    //return this.cart.slice();
+
+    return this.http.get(this.backendApi + '/cart/get');
+  }
+
   addItemToCart(item: Pizza | Pasta){
-    this.cart.push(item);
-    this._cartSubject$.next(this.cart);
+    const quantity = 1;
+    const id = item.id;
+    const type = item.type
+
+    return this.http.post(this.backendApi + '/cart/add', {
+      id: id,
+      type: item.type,
+      quantity: quantity
+    })
+    //this.cart.push(item);
+   // this._cartSubject$.next(this.cart);
+
+
   }
 
   updateCartItem(id: number, item: Pizza | Pasta ){

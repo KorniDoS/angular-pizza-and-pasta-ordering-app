@@ -21,6 +21,9 @@ export class Pizza {
   description?: string;
 
   @Column()
+  type: string = 'Pizza';
+
+  @Column()
   size: Size;
 
   @Column()

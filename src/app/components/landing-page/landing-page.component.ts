@@ -7,7 +7,9 @@ import { MenuService } from './../../services/menu.service';
 import { ToggleSidenavService } from './../header/toggle-sidenav.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
-import { concatMap, shareReplay, Subscription } from 'rxjs';
+import { concatMap, Observable, shareReplay, Subscription } from 'rxjs';
+import { concat } from 'rxjs';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -22,7 +24,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   menu: any[] = [];
   cart: Pizza[] | Pasta[] = [];
   team: Team[] = [];
-
+  obs$!: Observable<any>;
   constructor(
     private menuService: MenuService,
     private cartService: CartService,
@@ -34,10 +36,18 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.team = team;
     });
 
-    this.menuSub$ = this.menuService._menuSubject$.subscribe((res) => {
+   // this.menuSub$ = this.menuService._menuSubject$.subscribe((res) => {
+    //  this.menu = res;
+    //  console.log(this.menu);
+   // });
+
+    this.obs$ = combineLatest([this.menuService.getAdminPastas(), this.menuService.getAdminPizzas()]);
+
+    this.menuSub$ = this.obs$.subscribe(res=>{
       this.menu = res;
-      console.log(this.menu);
-    });
+      console.log(res);
+    })
+
   }
 
   ngOnDestroy(): void {

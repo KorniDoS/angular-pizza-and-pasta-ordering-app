@@ -1,3 +1,5 @@
+import { AuthService } from 'src/app/services/auth.service';
+import { concatMap } from 'rxjs';
 import { SnackbarService } from './../../services/snackbar.service';
 import { Pasta } from './../../models/pasta.model';
 import { Pizza } from './../../models/pizza.model';
@@ -23,7 +25,8 @@ export class DialogComponent implements OnInit {
     private menuService: MenuService,
     private cartService: CartService,
     private _formBuilder: FormBuilder,
-    private snackBarService: SnackbarService
+    private snackBarService: SnackbarService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -33,12 +36,28 @@ export class DialogComponent implements OnInit {
     this.pizzaExtraGroup.controls.crustType.patchValue(this.data.item.crust);
     this.pizzaExtraGroup.controls.size.patchValue(this.data.item.size);
     }
+
+    console.log(this.isAdmin);
+
+    this.cartService.getCart().subscribe((res:any)=>{
+
+      this.cartItems = res["products"];
+    })
+
+   // t//his.cartItems = this.cartService.getLocalCart()
   
   }
 
+  get isAdmin(){
+    return this.authService.isAdmin;
+  }
+
+
+  cartItems: any[] = []
+
   editMode: boolean = false;
 
-  toppingsCopy?: any[] = [...this.data.item?.toppings];
+  toppingsCopy: string[] = [...this.data.item?.toppings];
 
   pizzaToppingGroup = this._formBuilder.group({
     topping: [''],
@@ -62,7 +81,7 @@ export class DialogComponent implements OnInit {
     if (trimmed?.length === 0) {
       return;
     } else {
-      this.toppingsCopy?.push(trimmed);
+      this.toppingsCopy?.push(trimmed!);
       this.pizzaToppingGroup.controls.topping.patchValue('');
       this.pastaForm.controls.ingredients.patchValue('');
     }
@@ -73,10 +92,23 @@ export class DialogComponent implements OnInit {
   completeEditing(item: any, id: any) {
     console.log(id);
     if (item.type === 'Pizza') {
-      let realId = this.menuService.getPizzaMenu().findIndex((item: Pizza)=> item.id === id);
-      console.log(realId);
+     // let realId = this.menuService.getPizzaMenu().findIndex((item: Pizza)=> item.id === id);
+     // console.log(realId);
       //let index = id;
-      let editedObject: Pizza = {
+      // let editedObject: Pizza = {
+      //   id: id,
+      //   name: item.name,
+      //   type: item.type,
+      //   toppings: this.toppingsCopy,
+      //   crust: this.pizzaExtraGroup.controls.crustType.value!,
+      //   size: this.pizzaExtraGroup.controls.size.value!,
+      //   image: item.image,
+      //   price: item.price,
+      //   description: item.description,
+      //   quantity: 1
+      // };
+
+      let editedPizza: Pizza = {
         id: id,
         name: item.name,
         type: item.type,
@@ -87,15 +119,26 @@ export class DialogComponent implements OnInit {
         price: item.price,
         description: item.description,
         quantity: 1
-      };
-      this.menuService.updatePizzaItem(realId, editedObject);
-      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK', 5000);
+      }
+
+      this.menuService.updatePizzaItem(id, editedPizza).subscribe(res=>{
+        console.log('Successfully update item with id', id);
+
+        //this.menuService.newItems.complete();
+        this.menuService.newItems.next(null);
+      });
+
+
+      //this.menuService.updatePizzaItem(realId, editedObject);
+
+
+      this.snackBarService.openSnackBar(`${editedPizza.name} was successfully updated!`, 'OK', 5000);
       console.log('Completed editing');
       this.dialogRef.close();
     } else {
-      console.log(id);
-      let realId = this.menuService.getPastaMenu().findIndex((item:Pasta)=> item.id === id);
-      let editedObject: Pasta = {
+   //   console.log(id);
+     // let realId = this.menuService.getPastaMenu().findIndex((item:Pasta)=> item.id === id);
+      let editedPasta: Pasta = {
         id: id,
         name: item.name,
         type: item.type,
@@ -105,23 +148,37 @@ export class DialogComponent implements OnInit {
         description: item.description,
         quantity: 1
       };
-      this.menuService.updatePastaItem(realId, editedObject);
-      this.snackBarService.openSnackBar(`${editedObject.name} was successfully updated!`, 'OK', 5000);
+      this.menuService.updatePastaItem(id, editedPasta).subscribe(res=>{
+        this.menuService.newItems.next(null);
+      });
+      this.snackBarService.openSnackBar(`${editedPasta.name} was successfully updated!`, 'OK', 5000);
       console.log('Completed editing');
       this.dialogRef.close();
     }
   }
 
 
-  addToCart(item: any) {
-    if(!this.cartService.getCart().includes(item)){
-      item.quantity = 1;
-      this.cartService.addItemToCart(item);
-      this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK', 5000);
-      //this.SnackbarService
-    }
+  // addToCart(item: any) {
+  //   if(!this.cartService.getCart().includes(item)){
+  //     item.quantity = 1;
+  //     this.cartService.addItemToCart(item);
+  //     this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK', 5000);
+  //     //this.SnackbarService
+  //   }
 
-    this.dialogRef.close();
+  //   this.dialogRef.close();
+  // }
+
+
+  addToCart(item: any){
+    if(this.cartItems.includes(item)){
+      return;
+    } else {
+      this.cartService.addItemToCart(item).subscribe(res=>{
+        console.log(res);
+        console.log('Item added to cart');
+      })
+    }
   }
 
   toggleEditMode() {

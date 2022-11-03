@@ -51,19 +51,19 @@
   <section class="menu-showcase container">
     <h3 class="menu-showcase-title u-padding-big">Check Our Menu</h3>
     <div *ngIf="menu !== []" class="menu-showcase__items">
-      <ng-container *ngFor="let menuItem of menu[0].pizza; let j = index">
+      <ng-container *ngFor="let menuItem of menu[0]; let j = index">
         <app-menu-showcase-item
         *ngIf="j<3"
           [menuItem]="menuItem"
-          [id]="j"
+          [id]="menuItem.id"
         ></app-menu-showcase-item>
       </ng-container>
 
-      <ng-container *ngFor="let menuItem of menu[1].pasta; let y = index">
+      <ng-container *ngFor="let menuItem of menu[1]; let y = index">
         <app-menu-showcase-item
           *ngIf="y<2"
           [menuItem]="menuItem"
-          [id]="y"
+          [id]="menuItem.id"
         ></app-menu-showcase-item>
       </ng-container>
     </div>

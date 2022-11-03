@@ -15,13 +15,13 @@ export class AuthService {
 
 
     async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{accessToken: string}>{
-        const {username, password, role} = authCredentialsDto;
+        const {username, password} = authCredentialsDto;
 
         const user = await this.usersRepository.findOne({where: {username}});
 
         if(user && (await bcrypt.compare(password, user.password) )){
-
-          const payload: JwtPayload = {username};
+            const userRole = user.role;
+          const payload: JwtPayload = {username, userRole};
           const accessToken: string = await this.jwtService.sign(payload);
           return {accessToken};
 

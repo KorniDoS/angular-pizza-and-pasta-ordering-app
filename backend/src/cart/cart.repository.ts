@@ -39,12 +39,12 @@ export class CartRepository extends Repository<Cart>{
     async addItemToCart(addNewItemDto: AddNewItemDto, user: User){
 
         const query = this.createQueryBuilder('cart');
-        const {id, quantity} = addNewItemDto;
+        const {id, quantity, type} = addNewItemDto;
         query.where('cart.userId = :user_id', {user_id: user.id});
         const cart = await query.getOne();
 
         //cart.products = [...cart.products, {id: id, quantity: quantity}];
-        cart.products.push({id: id, quantity: quantity});
+        cart.products.push({id: id, type: type, quantity: quantity});
 
         await this.save(cart);
         return cart;
@@ -72,7 +72,7 @@ export class CartRepository extends Repository<Cart>{
 
     async updateCartItem(updateCartItemDto: UpdateCartItemDto, user: User){
 
-        const {id, quantity } = updateCartItemDto;
+        const {id, quantity, type } = updateCartItemDto;
         const query = this.createQueryBuilder('cart');
 
         query.where('cart.userId = :user_id', {user_id: user.id});
@@ -82,7 +82,7 @@ export class CartRepository extends Repository<Cart>{
         const updateIndex = cart.products.findIndex(item=> item.id == id);
 
         if(updateIndex !== -1){
-            cart.products[updateIndex] = {id: id, quantity: quantity}; 
+            cart.products[updateIndex] = {id: id, type: type, quantity: quantity}; 
             await this.save(cart);
         } else{
             throw new NotFoundException();

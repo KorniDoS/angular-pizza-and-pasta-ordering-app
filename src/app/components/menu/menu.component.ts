@@ -9,12 +9,16 @@ import {
   ViewChild,
   OnDestroy,
   AfterViewInit,
+  ViewChildren,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import {
   combineLatest,
-  map,
+  concatAll,
+  concatMap,
+  exhaustMap,
+  mergeMap,
   of,
   shareReplay,
   Subscription,
@@ -23,7 +27,15 @@ import {
 } from 'rxjs';
 import { Pasta } from 'src/app/models/pasta.model';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { concat, toArray, Observable } from 'rxjs';
+import { merge } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs';
+import { from } from 'rxjs';
+import { WizardComponent } from '../wizard/wizard.component';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -40,6 +52,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
   pizzaItemsDataSource = new MatTableDataSource<Pizza>();
   pastaItemsDataSource = new MatTableDataSource<Pasta>();
 
+  @ViewChild(WizardComponent) wizardComponent!: WizardComponent;
   @ViewChild('pizzaPaginator')
   pizzaPaginator!: MatPaginator;
   @ViewChild('pastaPaginator')
@@ -57,37 +70,105 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
     'price',
   ];
 
+  combinedPizzaItems: any[] = [];
+  combinedPastaItems: any[] = [];
   constructor(
     private menuService: MenuService,
     public dialog: MatDialog,
     private fb: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.pizzaPastaSub$ = this.menuService._pizzaSubject$
-      .pipe(
-        tap(()=>this.spinner.show()),
-        switchMap((pizza: any) => {
-          return combineLatest(of(pizza), this.menuService._pastaSubject$);
-        }),
-        shareReplay(),
-        map(([pizza, pasta]) => {
-          return [pizza, pasta];
-        })
-      )
-      .subscribe((res) => {
-        this.pizzaItems = res[0];
-        this.pastaItems = res[1];
+    this.spinner.show();
+    // this.pizzaPastaSub$ = this.menuService._pizzaSubject$
+    //   .pipe(
+    //     tap(()=>this.spinner.show()),
+    //     switchMap((pizza: any) => {
+    //       return combineLatest(of(pizza), this.menuService._pastaSubject$);
+    //     }),
+    //     shareReplay(),
+    //     map(([pizza, pasta]) => {
+    //       return [pizza, pasta];
+    //     })
+    //   )
+    //   .subscribe((res) => {
+    //     this.pizzaItems = res[0];
+    //     this.pastaItems = res[1];
 
-        this.pizzaItemsDataSource.data = this.pizzaItems;
-        this.pastaItemsDataSource.data = this.pastaItems;
+    //     this.pizzaItemsDataSource.data = this.pizzaItems;
+    //     this.pastaItemsDataSource.data = this.pastaItems;
 
-        setTimeout(()=>{
-        this.spinner.hide();
-        }, 1000)
-       
-      });
+    //     setTimeout(()=>{
+    //     this.spinner.hide();
+    //     }, 1000)
+
+    //   });
+
+    const adminPizzas: Observable<any> = this.menuService.getAdminPizzas();
+    const adminPastas: Observable<any> = this.menuService.getAdminPastas();
+    const pizzaMenu: Observable<any> = this.menuService.getPizzaMenu();
+    const pastaMenu: Observable<any> = this.menuService.getPastaMenu();
+
+    let concated: Observable<any>;
+
+    if (this.authService.isAdmin === true) {
+      concated = combineLatest(adminPizzas, adminPastas);
+      this.pizzaPastaSub$ = this.menuService.newItems
+        .pipe(mergeMap((_newItems) => concated))
+        .subscribe((value: any) => {
+          console.log('Received new values!');
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 1000);
+
+          this.combinedPizzaItems = [...value[0]];
+          this.combinedPastaItems = [...value[1]];
+
+          this.pizzaItemsDataSource.data = this.combinedPizzaItems;
+          this.pastaItemsDataSource.data = this.combinedPastaItems;
+
+          console.log(this.combinedPizzaItems);
+        });
+    } else {
+      concated = combineLatest(adminPizzas, adminPastas, pizzaMenu, pastaMenu);
+      this.pizzaPastaSub$ = this.menuService.newItems
+        .pipe(mergeMap((_newItems) => concated))
+        .subscribe((value: any) => {
+          console.log('Received new values!');
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 1000);
+
+          this.combinedPizzaItems = [...value[0], ...value[2]];
+          this.combinedPastaItems = [...value[1], ...value[3]];
+
+          this.pizzaItemsDataSource.data = this.combinedPizzaItems;
+          this.pastaItemsDataSource.data = this.combinedPastaItems;
+
+          console.log(this.combinedPizzaItems);
+        });
+    }
+
+    // this.pizzaPastaSub$ = concated.subscribe((value:any)=> {
+    // this.combinedPizzaItems= [...value[0], ...value[2]];
+    // this.combinedPastaItems = [...value[1], ...value[3]];
+    //
+    // this.pizzaItemsDataSource.data = this.combinedPizzaItems;
+    //  this.pastaItemsDataSource.data = this.combinedPastaItems;
+    // console.log(combinedPizzaItems);
+    //  }
+
+    // );
+
+    //this.http.get('http://localhost:3000/pizza').subscribe(console.log);
+    //this.http.get('http://localhost:3000/pasta').subscribe(console.log);
+    //this.http.get('http://localhost:3000/pizza/user').subscribe(console.log);
+    //this.http.get('http://localhost:3000/pasta/user').subscribe(console.log);
+
+    //wholeMenu.subscribe(console.log)
   }
 
   createNew() {
@@ -115,7 +196,8 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
     this.pizzaPastaSub$.unsubscribe();
   }
 
-  onWizardDone(event: boolean){
+  onWizardDone(event: boolean) {
     this.wizardMode = false;
+    //this.wizardComponent.
   }
 }

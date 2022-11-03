@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { SnackbarService } from './services/snackbar.service';
 import { Pizza } from './models/pizza.model';
@@ -17,6 +18,7 @@ import {
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { sanitizeIdentifier } from '@angular/compiler';
 import { Pasta } from './models/pasta.model';
+import { environment } from 'src/environments/environment';
 
 const SMALL_WIDTH_BREAKPOINT = 45; //45em = 700px
 @Component({
@@ -40,6 +42,9 @@ export class AppComponent implements OnInit, OnDestroy {
     { link: 'menu', icon: 'book' },
     { link: 'cart', icon: 'shopping_cart' },
     { link: 'contact', icon: 'contacts' },
+    {link: 'login', icon: 'person'},
+    {link: 'logout', icon: 'highlight_off'}
+
   ];
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -51,7 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     private elementRef: ElementRef,
     private snackbarService: SnackbarService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -59,19 +65,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.cartServiceSub$ = this.cartService._cartSubject$.subscribe(
       (cartItems) => {
         this.cart = cartItems;
-
-        //  if(this.initialLoad === true){
-        //this.initialLoad = false;
-        // this.initialLoadCounter++;
-        // this.initialLoad = false;
-        //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-        //}
-
-        // if(this.initialLoad === false && this.initialLoadCounter === 2){
-        // this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-        //}
-        //this.snackbarService.openSnackBar('New items added to cart!', 'OK');
-
         console.log(this.cart);
       }
     );
@@ -103,5 +96,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.breakpointObs$.unsubscribe();
     this.cartServiceSub$.unsubscribe();
     this.sideNavSub$.unsubscribe();
+  }
+
+  onLogout(){
+    this.authService.logout();
   }
 }

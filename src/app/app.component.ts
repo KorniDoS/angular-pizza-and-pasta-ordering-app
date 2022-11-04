@@ -62,12 +62,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authService.autoLogin();
-    this.cartServiceSub$ = this.cartService._cartSubject$.subscribe(
-      (cartItems) => {
-        this.cart = cartItems;
-        console.log(this.cart);
-      }
-    );
+  //   this.cartService.getCart().subscribe((res: any)=>{
+  //    this.cart = res.products;
+  //    console.log(this.cart);
+  //  })
+   this.cartServiceSub$ = this.cartService._cartSubject$.subscribe(
+    (cartItems) => {
+      this.cart = cartItems;
+      console.log(this.cart);
+    }
+  );
     this.sideNavSub$ = this.toggleSidenavService.toggled.subscribe((res) => {
       this.showSidenav = res;
       console.log(res);
@@ -100,5 +104,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onLogout(){
     this.authService.logout();
+    this.cartService._cartSubject$.next([]);
   }
 }

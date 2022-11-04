@@ -146,4 +146,12 @@ export class MenuService {
   //    this._menuSubject$.next(this.menu);
   //    console.log(this.menu[1].pasta);
   // }
+
+  getPizzaById(id: string){
+    return this.http.get(this.backendApi + '/pizza/' + id);
+  }
+
+  getPastaById(id: string){
+    return this.http.get(this.backendApi + '/pasta/' + id);
+  }
 }

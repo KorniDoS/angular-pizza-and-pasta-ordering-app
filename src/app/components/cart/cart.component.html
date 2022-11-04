@@ -1,13 +1,13 @@
 <main class="cart">
   <div
     class="cart__container container"
-    *ngIf="cartItems.length != 0 && showCheckoutForm === false"
+    *ngIf="cartTableDataSource.data.length != 0 && showCheckoutForm === false"
   >
     <h1 class="u-margin-block-medium">Cart</h1>
     <table
       class="mat-table"
       mat-table
-      [dataSource]="cartItems"
+      [dataSource]="cartTableDataSource"
       class="mat-elevation-z8"
       #table
     >
@@ -62,9 +62,9 @@
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef>Price</th>
         <td mat-cell #price *matCellDef="let element">
-          <span>€</span>{{ element.price * element.quantity }}
+          <span>€</span>{{ +element.price }}
         </td>
-        <td mat-footer-cell *matFooterCellDef>
+        <td mat-footer-cell *matFooterCellDef="let row">
           Total: <strong>{{ total | currency: "EUR" }}</strong>
         </td>
       </ng-container>

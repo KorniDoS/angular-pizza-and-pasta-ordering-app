@@ -12,6 +12,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dialog',
@@ -29,6 +30,7 @@ export class DialogComponent implements OnInit {
     private authService: AuthService,
   ) {}
 
+  addItemToCartSub?: Subscription;
   ngOnInit(): void {
     //console.log(this.data.item);
 
@@ -171,14 +173,28 @@ export class DialogComponent implements OnInit {
 
 
   addToCart(item: any){
-    if(this.cartItems.includes(item)){
+    console.log(item);
+    if(this.cartItems.find(items=> items.id === item.id)){
+      this.snackBarService.openSnackBar(`${item.name} cannot be added multiple times to cart. If you want to order a bigger quantity, check out your cart!`, 'I understand.', 10000);
+    //  console.log(item);
       return;
     } else {
-      this.cartService.addItemToCart(item).subscribe(res=>{
-        console.log(res);
+     this.addItemToCartSub = this.cartService.addItemToCart(item).subscribe(res=>{
+      //  console.log(item);
+      //  console.log(res);
+      this.snackBarService.openSnackBar(`${item.name} successfully added to cart!`, 'OK', 5000);
+    
+      this.cartItems.push(item);
         console.log('Item added to cart');
+        this.cartService._cartSubject$.next(this.cartItems);
+        console.log(this.cartItems);
+
+
+        this.addItemToCartSub?.unsubscribe();
       })
     }
+
+    this.dialogRef.close();
   }
 
   toggleEditMode() {

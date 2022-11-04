@@ -10,7 +10,7 @@
         *ngFor="let link of navigationLinks; let i = index"
         [routerLink]="[link.link === 'logout' ? '/login' : link.link]"
         (click)="link.link === 'logout' && onLogout()"
-        [ngClass]="{'border-top-primary': link.link === 'login'}"
+        [ngClass]="{ 'border-top-primary': link.link === 'login' }"
       >
         <a matLine [routerLink]="[link.link]">{{ link.link | titlecase }}</a>
         <a [routerLink]="[link.link]" mat-icon-button>
@@ -24,38 +24,8 @@
             <mat-icon>{{ link.icon }}</mat-icon>
           </ng-template>
         </a>
-      <!-- </mat-list-item>
-      <mat-list-item
-      >
-      <a matLine [routerLink]="['/login']">Login</a>
-      <a [routerLink]="['/login']">
-        <mat-icon>person</mat-icon>
-      </a>
-      </mat-list-item
-    >
-    <mat-list-item (click)="onLogout()" class="d-flex-space"
-      >Logout <mat-icon color="warn">stop</mat-icon>
-    -->
-      </mat-list-item
-    > 
+      </mat-list-item>
     </mat-nav-list>
-
-    <!-- <mat-nav-list>
-      <mat-list-item
-        >
-        <a matLine [routerLink]="['/login']">Login</a>
-        <a [routerLink]="['/login']">
-          <mat-icon>supervised_user_circle</mat-icon>
-        </a>
-        </mat-list-item
-      >
-      <mat-list-item (click)="onLogout()" class="d-flex-space"
-        >Logout <mat-icon color="warn">stop</mat-icon>
-        
-        </mat-list-item
-      >
-    </mat-nav-list> -->
-
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet #router></router-outlet>

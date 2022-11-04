@@ -115,7 +115,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
     let concated: Observable<any>;
 
     if (this.authService.isAdmin === true) {
-      concated = combineLatest(adminPizzas, adminPastas);
+      concated = combineLatest([adminPizzas, adminPastas]);
       this.pizzaPastaSub$ = this.menuService.newItems
         .pipe(mergeMap((_newItems) => concated))
         .subscribe((value: any) => {
@@ -133,7 +133,7 @@ export class MenuComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log(this.combinedPizzaItems);
         });
     } else {
-      concated = combineLatest(adminPizzas, adminPastas, pizzaMenu, pastaMenu);
+      concated = combineLatest([adminPizzas, adminPastas, pizzaMenu, pastaMenu]);
       this.pizzaPastaSub$ = this.menuService.newItems
         .pipe(mergeMap((_newItems) => concated))
         .subscribe((value: any) => {

@@ -89,7 +89,7 @@ export class PizzasRepository extends Repository<Pizza> {
   async getPizzaById(id: string, user: User){
     const query = this.createQueryBuilder('pizza');
 
-    query.where('pizza.id = :id AND pizza.userId = :user_id ', {id: id, user_id: user.id});
+    query.where('pizza.id = :id ', {id: id});
     
     if(await query.getCount() === 0){
       throw new NotFoundException(`Item with ${id} does not exist`);
